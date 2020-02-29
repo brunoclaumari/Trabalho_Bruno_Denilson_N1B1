@@ -4,18 +4,22 @@
  * and open the template in the editor.
  */
 package principal;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  *
  * @author 082170034
  */
-public class TrabalhoN1_LP2_Bruno_Denilson {
+public class entrada {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Gson gson=new GsonBuilder().create();
+        
+        
     }
     
 }

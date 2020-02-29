@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package estadoConsole;
 
 /**
  *
- * @author 082170034
+ * @author BRUNOSILVA
  */
-public class Gerente extends Funcionario{
-    
-    public Gerente(int id) {
-        super(id);
-    }
-    
-    
+public enum EnumEstadoConsole {
     
 }
