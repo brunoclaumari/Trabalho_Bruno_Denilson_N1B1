@@ -7,13 +7,12 @@ package entidades;
 
 /**
  *
- * @author 082170034
+ * @author BRUNOSILVA
  */
-public class Pedido extends EntidadePai {
-   
-    public Pedido(int id) {
+public class Itens_Pedido extends EntidadePai {
+    
+    public Itens_Pedido(int id) {
         super(id);
     }
-   
     
 }

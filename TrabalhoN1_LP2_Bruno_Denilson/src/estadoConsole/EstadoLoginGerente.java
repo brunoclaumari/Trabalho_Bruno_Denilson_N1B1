@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author bruna
  */
-public class Login_Gerente extends MaqEstadoLogins{
+public class EstadoLoginGerente extends MaqEstadoLogins{
 
     @Override
     public boolean Executar() {
@@ -25,8 +25,7 @@ public class Login_Gerente extends MaqEstadoLogins{
         System.out.println("LOGIN: ");
         usuario.setLogin(sc.nextLine());
         System.out.println("SENHA: ");
-        usuario.setSenha(sc.nextLine());
-        
+        usuario.setSenha(sc.nextLine());       
         
         
         

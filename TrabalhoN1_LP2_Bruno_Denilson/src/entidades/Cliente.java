@@ -9,19 +9,15 @@ package entidades;
  *
  * @author 082170034
  */
-public class Cliente {
-    private int id;
+public class Cliente extends EntidadePai {   
+    
+    
     private String nome;
 
     public Cliente(int id) {
-        this.id = id;
-    }    
-    
-
-    public int getId() {
-        return id;
-    }
-    
+        super(id);
+    }     
+      
 
     public String getNome() {
         return nome;
@@ -31,4 +27,5 @@ public class Cliente {
         this.nome = nome;
     }
     
+     
 }

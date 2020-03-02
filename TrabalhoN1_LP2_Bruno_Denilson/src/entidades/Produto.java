@@ -9,18 +9,15 @@ package entidades;
  *
  * @author 082170034
  */
-public class Produto {
-    private int id;
+public class Produto extends EntidadePai{
+    
     private String nome;
     private double preco;
 
-    public int getId() {
-        return id;
+    public Produto(int id) {
+        super(id);
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+   
 
     public String getNome() {
         return nome;

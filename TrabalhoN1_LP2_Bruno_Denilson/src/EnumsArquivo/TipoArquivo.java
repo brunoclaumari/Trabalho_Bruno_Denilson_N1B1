@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package EnumsArquivo;
 
 /**
  *
- * @author 082170034
+ * @author BRUNOSILVA
  */
-public class Pedido extends EntidadePai {
-   
-    public Pedido(int id) {
-        super(id);
-    }
-   
-    
+public abstract class TipoArquivo {
+    public abstract String enviaNome();
 }

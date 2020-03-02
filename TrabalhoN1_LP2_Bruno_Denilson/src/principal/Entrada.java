@@ -4,22 +4,28 @@
  * and open the template in the editor.
  */
 package principal;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import estadoConsole.EnumEstadoConsole;
+import estadoConsole.MaqEstadoLogins;
 
 /**
  *
  * @author 082170034
  */
-public class entrada {
+public class Entrada {
+
+    public static MaqEstadoLogins estadoMaq;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Gson gson=new GsonBuilder().create();
-        
-        
+        estadoMaq = EnumEstadoConsole.TELA_INICIAL.getEstadoMaq();
+        boolean saindo = false;
+        while (!saindo) {
+            saindo = estadoMaq.Executar();
+        }
+
     }
-    
+
 }

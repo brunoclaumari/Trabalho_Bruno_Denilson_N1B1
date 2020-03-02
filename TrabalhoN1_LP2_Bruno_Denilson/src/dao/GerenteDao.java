@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estadoConsole;
+package dao;
 
 /**
  *
- * @author bruna
+ * @author BRUNOSILVA
  */
-public class Login_Vendedor {
+public class GerenteDao {
+    
     
 }
