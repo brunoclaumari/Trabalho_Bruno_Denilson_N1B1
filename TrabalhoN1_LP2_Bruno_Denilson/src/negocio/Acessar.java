@@ -5,6 +5,7 @@
  */
 package negocio;
 
+import entidades.Funcionario;
 import entidades.Usuario;
 
 /**
@@ -13,16 +14,18 @@ import entidades.Usuario;
  */
 public class Acessar {
 
-    private boolean validaSenha(String senhaUsu, String senhaDigitada) {
+    private boolean validaSenha_Login(String senhaUsu, String senhaDigitada) {
         return senhaUsu.equals(senhaDigitada);
     }
     
-    public boolean validaUsuario(Usuario usuario){
+    public boolean validaUsuario(Usuario usuDigitado, Usuario usuDoSistema){
         boolean usuValido=false;
-        
-        
-        
-        return false;
+        usuValido=validaSenha_Login(usuDigitado.getLogin(), usuDoSistema.getLogin());
+        if(usuValido){
+            usuValido=validaSenha_Login(usuDigitado.getSenha(), usuDoSistema.getSenha());
+        }       
+                
+        return usuValido;
     
     }
 
