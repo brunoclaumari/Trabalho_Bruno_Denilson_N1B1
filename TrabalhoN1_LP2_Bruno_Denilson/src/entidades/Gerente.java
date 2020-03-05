@@ -9,9 +9,9 @@ package entidades;
  *
  * @author 082170034
  */
-public class Gerente extends Funcionario{
-    
-      private Usuario usuario;
+public class Gerente extends Funcionario {
+
+    private Usuario usuario;
 
     public Usuario getUsuario() {
         return usuario;
@@ -20,10 +20,9 @@ public class Gerente extends Funcionario{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     public Gerente(int id) {
         super(id);
-    }    
-    
-    
+    }
+
 }

@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Cliente;
+import entidades.EntidadePai;
 import entidades.Pedido;
 import entidades.Produto;
 
@@ -14,9 +15,9 @@ import entidades.Produto;
  * @author 082170034
  */
 public interface Icadastro {
-    public void cadastraProduto(Produto p);
-    public void cadastraPedido(Pedido p);
-    public void cadastraCliente(Cliente c);
+    public void inserir(EntidadePai p);
+    public void alterar(EntidadePai p);
+    public void deletar(EntidadePai c);
      
     
 }

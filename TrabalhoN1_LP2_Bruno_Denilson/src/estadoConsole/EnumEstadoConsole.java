@@ -16,7 +16,9 @@ public enum EnumEstadoConsole {
     
     MENU_PRINCIPAL(new EstadoMenuPrincipal()),
     
-    TELA_INICIAL(new EstadoTelaInicial())
+    TELA_INICIAL(new EstadoTelaInicial()),
+    
+    CADASTRO_GERENTE(new EstadoCadastrosDeGerente())
     ;
 
     private final MaqEstadoLogins estadoMaq;

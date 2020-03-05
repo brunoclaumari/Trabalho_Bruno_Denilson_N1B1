@@ -21,6 +21,7 @@ public class EstadoTelaInicial extends MaqEstadoLogins {
         System.out.println("0 - Sair");
         System.out.println("1 - Login de Vendedor");
         System.out.println("2 - Login de Gerente");
+        System.out.println("---------------------------------");
         Scanner sc = new Scanner(System.in);       
         
         int alternativa = sc.nextInt();

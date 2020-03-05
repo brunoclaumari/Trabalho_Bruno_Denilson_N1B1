@@ -9,26 +9,14 @@ package entidades;
  *
  * @author 082170034
  */
-public class Funcionario {
-    private int id;
-    private String nome;
+public class Funcionario extends EntidadePai {
+    
+    private String nome;  
 
     public Funcionario(int id) {
-        this.id = id;
+        super(id);
     }
-    
-    
-
-    public int getId() {
-        return id;
-    }    
-
-    /*//Não tem o set para que o id não seja modificado posteriormente
-    public void setId(int id) {
-        this.id = id;
-    }
-    */
-
+     
     public String getNome() {
         return nome;
     }

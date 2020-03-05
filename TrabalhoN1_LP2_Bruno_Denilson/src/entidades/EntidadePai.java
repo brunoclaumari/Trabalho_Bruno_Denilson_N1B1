@@ -14,8 +14,7 @@ public class EntidadePai {
 
     public EntidadePai(int id) {
         this.id = id;
-    }
-    
+    }   
     
 
     public int getId() {
