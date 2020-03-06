@@ -52,12 +52,16 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         if (gerentes == null) {
             System.out.println("A lista de gerentes está vazia, "
                     + "cadastre um gerente!");
-            Entrada.estadoMaq=EnumEstadoConsole.CADASTRO_GERENTE.getEstadoMaq();
+            Entrada.estadoMaq=EnumEstadoConsole.CADASTRAR_FUNCIONARIO.getEstadoMaq();
 
         } else {
             for (Gerente g : gerentes) {
                 senhaValida = ac.validaUsuario(g.getUsuario(), usuario);
             }
+        }
+        
+        if(senhaValida){
+            
         }
         
         

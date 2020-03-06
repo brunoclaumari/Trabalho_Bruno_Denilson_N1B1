@@ -10,8 +10,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import entidades.EntidadePai;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -24,32 +26,64 @@ import java.util.logging.Logger;
  * @param <T>
  */
 public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
-    //Para definir o tipo de arquivo
-
-    private String tipoArquivo;
-
-    protected Class<T> entidade;
-
-    //Pega uma entidade e transforma em arquivo Json
-    protected abstract String MontaJson(ArrayList<T> listaEntidades);
-
-    //Pega um arquivo Json e transforma em uma entidade
-    protected abstract ArrayList<T> MontaListaDeEntidades(T entidade);
-
-    public PadraoDAO() {
+    
+    
+     public PadraoDAO() {
 
     }
 
     public PadraoDAO(Class<T> entidade) {
         this.entidade = entidade;
     }
+    
+    //Para definir o tipo de arquivo
+    private String tipoArquivo;
 
-    protected String getTipoArquivo() {
+    protected Class<T> entidade;
+    
+     protected String getTipoArquivo() {
         return tipoArquivo;
     }
 
     protected void setTipoArquivo(String tipoArquivo) {
         this.tipoArquivo = tipoArquivo;
+    }
+
+    //Pega uma entidade e transforma em arquivo Json
+    protected String MontaJson(ArrayList<T> listaEntidades) {
+        Gson gson = new GsonBuilder().create();        
+        String caminho = getTipoArquivo();
+        Type listType = new TypeToken<ArrayList<T>>() {}.getType();
+        String js = gson.toJson(listaEntidades, listType);   
+         
+        return js;
+    }
+
+    //Pega um arquivo Json e transforma em uma lista de entidade
+    protected ArrayList<T> MontaListaDeEntidades(T entidade) {
+        ArrayList<T> listaArquivo = null;
+        try {
+            listaArquivo = listar();
+            listaArquivo.add(entidade);
+        } catch (IOException ex) {
+            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return listaArquivo;        
+    }    
+    
+    //Escreve o Arquivo Json na pasta
+    protected void escreveArquivoJson(ArrayList<T> listaEntidades, String caminho){      
+        
+        String js = MontaJson(listaEntidades);     
+        
+        //Imprime lista no arquivo, porém tem que subir o arquivo inteiro pois se houver
+        //adição de dados, será adicionada na classe e na lista e salvará porcima do arquivo que já existe
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho))) {
+            bw.write(js);
+
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 
     /**
@@ -58,6 +92,8 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
      * Json
      * @throws IOException
      */
+    
+    //Lê um arquivo Json e retorna uma lista de entidades
     public ArrayList<T> listar() throws IOException {
         Gson gson = new GsonBuilder().create();
         ArrayList<T> listaArquivo = new ArrayList<>();

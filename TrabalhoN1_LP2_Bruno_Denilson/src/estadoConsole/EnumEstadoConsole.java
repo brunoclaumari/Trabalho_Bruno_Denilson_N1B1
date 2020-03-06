@@ -18,7 +18,7 @@ public enum EnumEstadoConsole {
     
     TELA_INICIAL(new EstadoTelaInicial()),
     
-    CADASTRO_GERENTE(new EstadoCadastrosDeGerente())
+    CADASTRAR_FUNCIONARIO(new EstadoMenuCadastroFuncionario())
     ;
 
     private final MaqEstadoLogins estadoMaq;

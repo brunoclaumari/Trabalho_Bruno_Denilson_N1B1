@@ -17,6 +17,8 @@ public class padraoControl<T extends EntidadePai> {
         
     }
     
-    protected void validaDados(T )
+    protected void validaDados(T entidade ){
+        
+    }
     
 }

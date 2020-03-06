@@ -49,41 +49,11 @@ public class GerenteDao extends PadraoDAO<Gerente> {
 
     public GerenteDao(Class entidade) {
         super(entidade);
-    }
+    }    
+    
 
-    @Override
-    protected String MontaJson(ArrayList<Gerente> listaEntidades) {
-        Gson gson = new GsonBuilder().create();        
-        String caminho = getTipoArquivo();       
-
-        Type listType = new TypeToken<ArrayList<Gerente>>() {}.getType();      
-
-        String js = gson.toJson(listaEntidades, listType);
-        
-
-        //Imprime lista no arquivo, porém tem que subir o arquivo inteiro pois se houver
-        //adição de dados, será adicionada na classe e na lista e salvará porcima do arquivo que já existe
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho))) {
-            bw.write(js);
-
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        return js;
-    }
-
-    @Override
-    protected ArrayList<Gerente> MontaListaDeEntidades(Gerente entidade) {
-        ArrayList<Gerente> listaArquivo = null;
-        try {
-            listaArquivo = listar();
-            listaArquivo.add(entidade);
-        } catch (IOException ex) {
-            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return listaArquivo;        
-    }
+    
+    
 }
 
 /*

@@ -12,7 +12,7 @@ import principal.Entrada;
  *
  * @author BRUNOSILVA
  */
-public class EstadoCadastrosDeGerente extends MaqEstadoLogins {
+public class EstadoMenuCadastroFuncionario extends MaqEstadoLogins {
 
     @Override
     public boolean Executar() {
