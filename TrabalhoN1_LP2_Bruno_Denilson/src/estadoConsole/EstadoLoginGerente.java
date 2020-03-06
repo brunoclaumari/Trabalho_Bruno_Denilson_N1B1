@@ -5,18 +5,20 @@
  */
 package estadoConsole;
 
+import com.google.gson.internal.LinkedTreeMap;
 import dao.GerenteDao;
 import dao.PadraoDAO;
 import entidades.Gerente;
 import entidades.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Acessar;
-import principal.Entrada;
+import telaInicial.Entrada;
 
 /**
  *
@@ -27,9 +29,11 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
     @Override
     public boolean Executar() {
         boolean sair = false;
+        boolean senhaValida = false;
         Scanner sc = new Scanner(System.in);
         Usuario usuario = new Usuario();
-        ArrayList<Gerente> gerentes = null;
+
+        ArrayList<Gerente> gerentes;
 
         System.out.println("Digite seus dados de Gerente!");
         System.out.println("-----------------------------");
@@ -39,32 +43,29 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         usuario.setSenha(sc.nextLine());
 
         PadraoDAO gDao = new GerenteDao();
+        //ArrayList<Gerente> aux = new ArrayList<>();
 
-        try {
-            gerentes = gDao.listar();
-        } catch (IOException ex) {
-            Logger.getLogger(EstadoLoginGerente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        gerentes = gDao.transformaParaEntidade();
 
         Acessar ac = new Acessar();
-        boolean senhaValida = false;
 
         if (gerentes == null) {
             System.out.println("A lista de gerentes está vazia, "
-                    + "cadastre um gerente!");
-            Entrada.estadoMaq=EnumEstadoConsole.CADASTRAR_FUNCIONARIO.getEstadoMaq();
+                    + "cadastre um gerente!\n");
+            Entrada.estadoMaq = EnumEstadoConsole.CADASTRAR_FUNCIONARIO.getEstadoMaq();
 
         } else {
-            for (Gerente g : gerentes) {
-                senhaValida = ac.validaUsuario(g.getUsuario(), usuario);
+            for (Gerente ger : gerentes) {
+                senhaValida = ac.validaUsuario(ger.getUsuario(), usuario);               
             }
+             if (senhaValida) {
+                    Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PRODUTO.getEstadoMaq();
+                } else {
+                    System.out.println("Dados usuario e senha inválidos!!");
+                    sair = true;
+                }
         }
-        
-        if(senhaValida){
-            
-        }
-        
-        
+
         return sair;
     }
 

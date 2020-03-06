@@ -7,16 +7,13 @@ package estadoConsole;
 
 /**
  *
- * @author 082170034
+ * @author BRUNOSILVA
  */
-public class TelaCadastroProduto extends MaqEstadoLogins {
+public class TelaCadastroPedido extends MaqEstadoLogins{
 
     @Override
     public boolean Executar() {
-        boolean sair=false;
-        
-        System.out.println("Bem vindo ao cadastro de PRODUTOS!!");
-        return sair;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

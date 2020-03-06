@@ -5,10 +5,24 @@
  */
 package negocio;
 
+import entidades.EntidadePai;
+
 /**
  *
  * @author BRUNOSILVA
  */
-public class gerenteControl {
-    
+public class gerenteControl extends padraoControl<EntidadePai> {
+
+    @Override
+    protected boolean validaDados(EntidadePai entidade) {
+        boolean ehValido = super.validaDados(entidade); //To change body of generated methods, choose Tools | Templates.
+
+        return ehValido;
+    }
+
+    @Override
+    protected void SalvarDados(EntidadePai entidade) {
+        super.SalvarDados(entidade); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

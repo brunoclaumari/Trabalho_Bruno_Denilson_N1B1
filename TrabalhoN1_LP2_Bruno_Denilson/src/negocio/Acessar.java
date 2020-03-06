@@ -17,16 +17,16 @@ public class Acessar {
     private boolean validaSenha_Login(String senhaUsu, String senhaDigitada) {
         return senhaUsu.equals(senhaDigitada);
     }
-    
-    public boolean validaUsuario(Usuario usuDigitado, Usuario usuDoSistema){
-        boolean usuValido=false;
-        usuValido=validaSenha_Login(usuDigitado.getLogin(), usuDoSistema.getLogin());
-        if(usuValido){
-            usuValido=validaSenha_Login(usuDigitado.getSenha(), usuDoSistema.getSenha());
-        }       
-                
+
+    public boolean validaUsuario(Usuario usuDigitado, Usuario usuDoSistema) {
+        boolean usuValido;
+        usuValido = validaSenha_Login(usuDigitado.getLogin(), usuDoSistema.getLogin());
+        if (usuValido) {
+            usuValido = validaSenha_Login(usuDigitado.getSenha(), usuDoSistema.getSenha());
+        }
+
         return usuValido;
-    
+
     }
 
 }

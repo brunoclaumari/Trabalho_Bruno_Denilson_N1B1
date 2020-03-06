@@ -5,15 +5,79 @@
  */
 package estadoConsole;
 
+import dao.GerenteDao;
+import entidades.Gerente;
+import entidades.Usuario;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author 082170034
  */
-public class TelaCadastroGerente extends MaqEstadoLogins{
+public class TelaCadastroGerente extends MaqEstadoLogins {
 
     @Override
     public boolean Executar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean sair = false;
+
+        ArrayList<Gerente> lista = null;
+        GerenteDao DAO = new GerenteDao();
+        Scanner sc = new Scanner(System.in);
+         
+        String json = null;     
+              
+
+        try {
+            lista = DAO.listar();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaCadastroGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int idSugerido;
+        if (lista == null) {
+            idSugerido = 1;
+            lista= new ArrayList<>();
+        } else {
+            idSugerido = lista.size() + 1;
+        }
+
+        Gerente ger = new Gerente(idSugerido);
+        Usuario usu = new Usuario();
+
+        System.out.println("Bem vindo ao cadastro de Gerente");
+        System.out.println("Digite o nome: ");
+        ger.setNome(sc.nextLine());
+        System.out.println("Digite um login para usuario: ");
+        usu.setLogin(sc.nextLine());
+        System.out.println("Digite uma senha para usuario: ");
+        usu.setSenha(sc.nextLine());
+        ger.setUsuario(usu);
+
+        char resp;
+
+        do {
+            System.out.println("Deseja salvar os dados? S/N");
+            resp = sc.nextLine().toUpperCase().charAt(0);
+        } while (resp != 'N' && resp != 'S');
+
+        
+        if (resp == 'S') {
+            
+            DAO.inserir(ger);
+            /*
+             lista.add(ger);
+            //json = DAO.MontaJson(lista);
+            DAO.escreveArquivoJson(lista);
+            */
+            System.out.println("O arquivo foi escrito!!");
+        }
+
+        return sair;
     }
-    
+
 }

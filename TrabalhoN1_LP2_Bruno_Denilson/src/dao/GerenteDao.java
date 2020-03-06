@@ -14,6 +14,7 @@ import entidades.EntidadePai;
 import entidades.Gerente;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,12 +50,32 @@ public class GerenteDao extends PadraoDAO<Gerente> {
 
     public GerenteDao(Class entidade) {
         super(entidade);
-    }    
-    
+    }
 
-    
-    
+    //Pega um arquivo Json e transforma em uma lista de entidade Gerente    
+    @Override
+      public ArrayList<Gerente> transformaParaEntidade() {
+        ArrayList<Gerente> retornaLista = new ArrayList<>();
+        Gson gson = new GsonBuilder().create();
+
+        try (JsonReader reader = new JsonReader(new FileReader(getTipoArquivo()))) {
+            Type type2 = new TypeToken<ArrayList<Gerente>>() {
+            }.getType();
+            //lendo = br.readLine();
+            retornaLista = gson.fromJson(reader, type2);
+            System.out.println("O arquivo existe e foi lido");
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return retornaLista;
+    }
 }
+
+
 
 /*
     

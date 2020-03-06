@@ -13,12 +13,17 @@ import entidades.EntidadePai;
  * @param <T>
  */
 public class padraoControl<T extends EntidadePai> {
-    public void SalvarDados(T entidade){
+    protected void SalvarDados(T entidade){
+        
         
     }
     
-    protected void validaDados(T entidade ){
+    protected boolean validaDados(T entidade ){
+        boolean entidValida=false;
         
+        
+        
+        return entidValida;
     }
     
 }

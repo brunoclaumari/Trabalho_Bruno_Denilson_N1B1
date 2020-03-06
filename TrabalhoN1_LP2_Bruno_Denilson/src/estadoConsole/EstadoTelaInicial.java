@@ -6,7 +6,7 @@
 package estadoConsole;
 
 import java.util.Scanner;
-import principal.Entrada;
+import telaInicial.Entrada;
 
 /**
  *
@@ -16,17 +16,20 @@ public class EstadoTelaInicial extends MaqEstadoLogins {
 
     @Override
     public boolean Executar() {
+        boolean sair = false;
+        Scanner sc = new Scanner(System.in); 
+        
         System.out.println("Olá, bem vindo ao nosso sistema");
         System.out.println("Escolha a opção desejada: ");
         System.out.println("0 - Sair");
         System.out.println("1 - Login de Vendedor");
         System.out.println("2 - Login de Gerente");
         System.out.println("---------------------------------");
-        Scanner sc = new Scanner(System.in);       
+              
         
         int alternativa = sc.nextInt();
         
-        boolean sair = false;
+        
         //MaqEstadoLogins estadoMaq;
         switch (alternativa) {            
             case 0:
@@ -39,6 +42,7 @@ public class EstadoTelaInicial extends MaqEstadoLogins {
                 Entrada.estadoMaq = EnumEstadoConsole.LOGIN_GERENTE.getEstadoMaq();
                 break;                
         }
+        
         return sair;
     }
     

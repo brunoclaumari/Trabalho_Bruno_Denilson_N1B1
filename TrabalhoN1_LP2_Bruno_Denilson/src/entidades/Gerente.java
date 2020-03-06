@@ -24,5 +24,14 @@ public class Gerente extends Funcionario {
     public Gerente(int id) {
         super(id);
     }
+    
+    @Override
+    public String toString(){
+        String imp= String.format(" id: %d \n "
+                + "name: %s \n"
+                + "login: %s \n"
+                + "senha: %s", getId(),getNome(),getUsuario().getLogin(),getUsuario().getSenha());
+        return imp;
+    }
 
 }

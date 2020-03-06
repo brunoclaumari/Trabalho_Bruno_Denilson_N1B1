@@ -71,8 +71,7 @@ public class Teste_Arquivo_Json {
         String path = "teste.json";
         String js = (gson.toJson(c1, Cliente.class));
 
-        Type listType = new TypeToken<List<Cliente>>() {
-        }.getType();
+        Type listType = new TypeToken<List<Cliente>>() {}.getType();
 
         //Imprimir avulso cliente c1
         

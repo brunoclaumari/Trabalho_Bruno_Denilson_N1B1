@@ -13,11 +13,12 @@ import entidades.Produto;
 /**
  *
  * @author 082170034
+ * @param <T>
  */
-public interface Icadastro {
-    public void inserir(EntidadePai p);
-    public void alterar(EntidadePai p);
-    public void deletar(EntidadePai c);
+public interface Icadastro <T extends EntidadePai>{
+    public void inserir(T entidade);
+    public void alterar(T entidade);
+    public void deletar(T entidade);
      
     
 }

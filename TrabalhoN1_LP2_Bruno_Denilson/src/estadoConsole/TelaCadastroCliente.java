@@ -9,6 +9,11 @@ package estadoConsole;
  *
  * @author 082170034
  */
-public class TelaCadastroCliente {
+public class TelaCadastroCliente extends MaqEstadoLogins {
+
+    @Override
+    public boolean Executar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -6,7 +6,7 @@
 package estadoConsole;
 
 import java.util.Scanner;
-import principal.Entrada;
+import telaInicial.Entrada;
 
 /**
  *
@@ -16,28 +16,33 @@ public class EstadoMenuCadastroFuncionario extends MaqEstadoLogins {
 
     @Override
     public boolean Executar() {
-       
-        
+        boolean sair = false;
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("CADASTRO DE GERENTE, bem vindo!!!");
         System.out.println("0 - Sair");
         System.out.println("1 - Cadastrar Gerente");
+        System.out.println("2 - Cadastrar Vendedor");
         System.out.println("--------------------------------");
-        Scanner sc = new Scanner(System.in);
         
-        int resp=sc.nextInt();
+
+        int resp = sc.nextInt();
+
         
-        boolean sair = false;
         //MaqEstadoLogins estadoMaq;
-        switch (resp) {            
+        switch (resp) {
             case 0:
                 sair = true;
                 break;
             case 1:
-                
+                Entrada.estadoMaq=EnumEstadoConsole.CADASTRA_GERENTE.getEstadoMaq();
+                break;
+            case 2:
+                Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_VENDEDOR.getEstadoMaq();
                 break;
         }
-        
+
         return sair;
     }
-    
+
 }
