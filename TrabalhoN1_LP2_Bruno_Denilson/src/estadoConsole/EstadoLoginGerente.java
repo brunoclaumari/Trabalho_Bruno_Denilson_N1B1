@@ -33,7 +33,7 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         Scanner sc = new Scanner(System.in);
         Usuario usuario = new Usuario();
 
-        ArrayList<Gerente> gerentes;
+        ArrayList<Gerente> gerentes = null;
 
         System.out.println("Digite seus dados de Gerente!");
         System.out.println("-----------------------------");
@@ -45,7 +45,11 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         PadraoDAO gDao = new GerenteDao();
         //ArrayList<Gerente> aux = new ArrayList<>();
 
-        gerentes = gDao.transformaParaEntidade();
+        try {
+            gerentes = gDao.transformaParaEntidade();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
         Acessar ac = new Acessar();
 

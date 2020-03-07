@@ -76,8 +76,9 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
     /**
      *
      * @return Método abstrato que transforma um Json em uma lista de Entidades
+     * @throws java.io.IOException
      */
-    public abstract ArrayList<T> transformaParaEntidade();   
+    public abstract ArrayList<T> transformaParaEntidade() throws IOException;   
 
     //Escreve o Arquivo Json na pasta
     public void escreveArquivoJson(ArrayList<T> listaEntidades) {

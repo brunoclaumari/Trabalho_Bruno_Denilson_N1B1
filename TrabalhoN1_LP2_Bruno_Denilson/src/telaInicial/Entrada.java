@@ -25,6 +25,7 @@ public class Entrada {
         while (!saindo) {
             saindo = estadoMaq.Executar();
         }
+        System.out.println("SAINDO DO SISTEMA, OBRIGADO!!!!");
 
     }
 

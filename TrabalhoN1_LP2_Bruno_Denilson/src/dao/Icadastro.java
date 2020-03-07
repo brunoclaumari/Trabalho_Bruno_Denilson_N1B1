@@ -5,10 +5,9 @@
  */
 package dao;
 
-import entidades.Cliente;
+
 import entidades.EntidadePai;
-import entidades.Pedido;
-import entidades.Produto;
+
 
 /**
  *

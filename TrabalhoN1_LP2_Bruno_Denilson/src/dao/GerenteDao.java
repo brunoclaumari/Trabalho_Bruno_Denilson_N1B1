@@ -52,13 +52,26 @@ public class GerenteDao extends PadraoDAO<Gerente> {
         super(entidade);
     }
 
-    //Pega um arquivo Json e transforma em uma lista de entidade Gerente    
+      
+    /**
+     *
+     * @return //Pega um arquivo Json e transforma em uma lista de entidade Gerente
+     * @throws java.io.IOException
+     * 
+     */
+    
     @Override
-      public ArrayList<Gerente> transformaParaEntidade() {
+      public ArrayList<Gerente> transformaParaEntidade() throws IOException {
         ArrayList<Gerente> retornaLista = new ArrayList<>();
         Gson gson = new GsonBuilder().create();
+        String caminho=getTipoArquivo();
 
-        try (JsonReader reader = new JsonReader(new FileReader(getTipoArquivo()))) {
+         if (!new File(caminho).exists()) {
+            new File(caminho).createNewFile();
+             System.out.println("Arquivo "+caminho+" criado!");        
+        }
+        else{
+        try (JsonReader reader = new JsonReader(new FileReader(caminho))) {
             Type type2 = new TypeToken<ArrayList<Gerente>>() {
             }.getType();
             //lendo = br.readLine();
@@ -70,12 +83,11 @@ public class GerenteDao extends PadraoDAO<Gerente> {
         } catch (IOException ex) {
             Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
         
         return retornaLista;
     }
 }
-
-
 
 /*
     
