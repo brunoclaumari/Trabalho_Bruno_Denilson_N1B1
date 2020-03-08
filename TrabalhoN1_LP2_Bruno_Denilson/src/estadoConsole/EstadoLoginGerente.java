@@ -5,18 +5,15 @@
  */
 package estadoConsole;
 
-import com.google.gson.internal.LinkedTreeMap;
+
 import dao.GerenteDao;
 import dao.PadraoDAO;
 import entidades.Gerente;
 import entidades.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import negocio.Acessar;
 import telaInicial.Entrada;
 
@@ -53,7 +50,7 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
 
         Acessar ac = new Acessar();
 
-        if (gerentes == null) {
+        if (gerentes == null || gerentes.isEmpty()) {
             System.out.println("A lista de gerentes está vazia, "
                     + "cadastre um gerente!\n");
             Entrada.estadoMaq = EnumEstadoConsole.CADASTRAR_FUNCIONARIO.getEstadoMaq();

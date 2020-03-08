@@ -5,15 +5,17 @@
  */
 package estadoConsole;
 
+import EnumsArquivo.EnumTipoCrud;
 import dao.GerenteDao;
+import dao.PadraoDAO;
 import entidades.Gerente;
 import entidades.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
@@ -23,58 +25,70 @@ public class TelaCadastroGerente extends MaqEstadoLogins {
 
     @Override
     public boolean Executar() {
-        boolean sair = false;
+        boolean sair = false;       
 
-        ArrayList<Gerente> lista = null;
-        GerenteDao DAO = new GerenteDao();
+        ArrayList<Gerente> lista = new ArrayList<>();
+        PadraoDAO DAO = new GerenteDao();
+
         Scanner sc = new Scanner(System.in);
-         
-        String json = null;     
-              
+
+        //String json = null;
 
         try {
-            lista = DAO.listar();
+            lista = DAO.transformaParaEntidade();
         } catch (IOException ex) {
             Logger.getLogger(TelaCadastroGerente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         int idSugerido;
-        if (lista == null) {
+
+        idSugerido = DAO.sugereId(lista);
+        /*
+         if (lista == null) {
             idSugerido = 1;
-            lista= new ArrayList<>();
+            //lista= new ArrayList<>();
         } else {
             idSugerido = lista.size() + 1;
         }
+         */
 
         Gerente ger = new Gerente(idSugerido);
         Usuario usu = new Usuario();
 
-        System.out.println("Bem vindo ao cadastro de Gerente");
-        System.out.println("Digite o nome: ");
-        ger.setNome(sc.nextLine());
-        System.out.println("Digite um login para usuario: ");
-        usu.setLogin(sc.nextLine());
-        System.out.println("Digite uma senha para usuario: ");
-        usu.setSenha(sc.nextLine());
-        ger.setUsuario(usu);
+        try {
+            System.out.println("Bem vindo ao cadastro de Gerente");
+            System.out.println("Digite o nome: ");
+            ger.setNome(sc.nextLine());
+            System.out.println("Digite um login para usuario: ");
+            usu.setLogin(sc.nextLine());
+            System.out.println("Digite uma senha para usuario: ");
+            usu.setSenha(sc.nextLine());
+            ger.setUsuario(usu);
 
-        char resp;
+            char resp;
 
-        do {
-            System.out.println("Deseja salvar os dados? S/N");
-            resp = sc.nextLine().toUpperCase().charAt(0);
-        } while (resp != 'N' && resp != 'S');
+            do {
+                System.out.println("Deseja salvar os dados? S/N");
+                resp = sc.nextLine().toUpperCase().charAt(0);
+            } while (resp != 'N' && resp != 'S');
 
-        
-        if (resp == 'S') {
-            
-            DAO.inserir(ger);
-            /*
+            if (resp == 'S') {
+                String operacao=EnumTipoCrud.INCLUIR.getNomeDoArquivo();
+
+                DAO.SalvarDadosDAO(ger, operacao);
+                /*
              lista.add(ger);
             //json = DAO.MontaJson(lista);
             DAO.escreveArquivoJson(lista);
-            */
-            System.out.println("O arquivo foi escrito!!");
+                 */
+                System.out.println("O arquivo foi escrito!!");
+            }
+        } catch (IOException e) {
+            e.getMessage();
+        } catch (NumberFormatException e) {
+            System.out.println("Não foi possível converter algum número");
+        } catch (Exception e) {
+            e.getMessage();
         }
 
         return sair;

@@ -5,15 +5,29 @@
  */
 package entidades;
 
+import java.util.Date;
+
 /**
  *
  * @author 082170034
  */
 public class Pedido extends EntidadePai {
-   
-    public Pedido(int id) {
-        super(id);
+
+    private Date data;
+    private Funcionario funcionario;
+
+    public Date getData() {
+        return data;
     }
-   
-    
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public Pedido(Funcionario funcionario, int id) {
+        super(id);
+        this.data = new Date(System.currentTimeMillis());
+        this.funcionario = funcionario;
+    }
+
 }

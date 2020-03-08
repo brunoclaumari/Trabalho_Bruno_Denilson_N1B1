@@ -9,23 +9,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.internal.LinkedTreeMap;
 
 import entidades.EntidadePai;
+import estadoConsole.EnumEstadoConsole;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import telaInicial.Entrada;
 
 /**
  *
@@ -40,8 +35,7 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
 
     public PadraoDAO(Class<T> entidade) {
         this.entidade = entidade;
-    }   
-        
+    }
 
     //Para definir o tipo de arquivo
     private String tipoArquivo;
@@ -54,7 +48,7 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
 
     protected void setTipoArquivo(String tipoArquivo) {
         this.tipoArquivo = tipoArquivo;
-    }    
+    }
 
     /**
      *
@@ -67,18 +61,16 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         Type listType = new TypeToken<ArrayList<T>>() {
         }.getType();
         String js = gson.toJson(listaEntidades, listType);
-        
+
         return js;
     }
-    
-    //Método abstrato que retorna um Json em uma lista de Entidaes
 
     /**
      *
      * @return Método abstrato que transforma um Json em uma lista de Entidades
      * @throws java.io.IOException
      */
-    public abstract ArrayList<T> transformaParaEntidade() throws IOException;   
+    public abstract ArrayList<T> transformaParaEntidade() throws IOException;
 
     //Escreve o Arquivo Json na pasta
     public void escreveArquivoJson(ArrayList<T> listaEntidades) {
@@ -95,14 +87,123 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         }
     }
 
+    //Lê um arquivo Json e retorna uma lista de entidades
+    public T consultar(int id) throws IOException {
+        ArrayList<T> cons = transformaParaEntidade();
+
+        T retorno = null;
+
+        if (cons == null || cons.isEmpty()) {
+            return null;
+        } else {
+            for (T ent : cons) {
+                if (ent.getId() == id) {
+                    retorno = ent;
+                    break;
+                }
+            }
+        }
+
+        return retorno;
+    }
+
+    public boolean validaInclusaoDAO(T entidade) throws IOException {
+        boolean valorInvalido = false;
+        if (consultar(entidade.getId()) != null) {
+            valorInvalido = true;
+            System.out.println("Este id já existe!");
+
+        }
+        if (entidade.getId() <= 0) {
+            valorInvalido = true;
+            System.out.println("Esse id é inválido");
+
+        }
+
+        return valorInvalido;
+    }
+
+    public void SalvarDadosDAO(T entidade, String operacao) throws IOException {
+
+        boolean dadosInvalidos = validaInclusaoDAO(entidade);
+        if (dadosInvalidos) {
+            System.out.println("Dados inválidos, cadastre novamente!");
+            Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_GERENTE.getEstadoMaq();
+        } else {
+            inserir(entidade);
+        }
+
+    }
+
     /**
      *
-     * @return Método retorna uma lista da entidade atual a partir do arquivo
-     * Json, porém não dá para serializar pois este é genérico
+     * @param p
      * @throws IOException
+     * @void Insere os dados no arquivo.
      */
-    //Lê um arquivo Json e retorna uma lista de entidades
-    public ArrayList<T> listar() throws IOException {
+    @Override
+    public void inserir(EntidadePai p) throws IOException {
+
+        ArrayList<T> arquivoLido = transformaParaEntidade();
+        
+        //Testa se está nulo, pois aí será instanciado
+        if (arquivoLido == null) {
+            arquivoLido = new ArrayList<>();
+        }
+        arquivoLido.add((T) p);
+        escreveArquivoJson(arquivoLido);
+        System.out.println("Arquivo escrito com sucesso");
+
+    }
+
+    @Override
+    public void alterar(EntidadePai p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deletar(EntidadePai p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int sugereId(ArrayList<T> listEntidade) {
+        int idSug;
+
+        if (listEntidade == null || listEntidade.isEmpty()) {
+            idSug = 1;
+        } else {
+            listEntidade.sort((a, b) -> Integer.compare(a.getId(), b.getId()));
+            T aux = listEntidade.get(listEntidade.size());
+            idSug = aux.getId() + 1;
+        }
+        return idSug;
+    }
+
+}
+
+//Pega um arquivo Json e transforma em uma lista de entidade
+/*
+         public ArrayList<T> MontaListaDeEntidades(T entidade) {
+        ArrayList<T> listaArquivo = null;
+        try {
+            listaArquivo = listar();
+            listaArquivo.add(entidade);
+        } catch (IOException ex) {
+            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaArquivo;
+    } 
+ */
+//---------------------------------------------------------------------------------------------
+/**
+ *
+ * @return Método retorna uma lista da entidade atual a partir do arquivo Json,
+ * porém não dá para serializar pois este é genérico
+ * @throws IOException
+ */
+
+/*
+public ArrayList<T> listar() throws IOException {
         Gson gson = new GsonBuilder().create();
         //Gson gson = new Gson();
          ArrayList<T> listaArquivo = new ArrayList<>();
@@ -131,58 +232,5 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         return listaArquivo;
     }
 
-    public T consultar(int id) throws IOException {
-        ArrayList<T> cons = listar();
 
-        T retorno = null;
-
-        for (T ent : cons) {
-            if (ent.getId() == id) {
-                retorno = ent;
-                break;
-            }
-        }
-
-        return retorno;
-    }
-   
-
-    @Override
-    public void inserir(EntidadePai p) {
-        try {
-            ArrayList<T> arquivoLido = listar();
-            arquivoLido.add((T) p);            
-
-        } catch (IOException ex) {
-            Logger.getLogger(PadraoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
-
-    @Override
-    public void alterar(EntidadePai p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deletar(EntidadePai c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-}
-
-
- //Pega um arquivo Json e transforma em uma lista de entidade
-   /*
-         public ArrayList<T> MontaListaDeEntidades(T entidade) {
-        ArrayList<T> listaArquivo = null;
-        try {
-            listaArquivo = listar();
-            listaArquivo.add(entidade);
-        } catch (IOException ex) {
-            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listaArquivo;
-    }    
-    */
+ */

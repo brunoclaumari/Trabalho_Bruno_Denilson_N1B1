@@ -5,8 +5,8 @@
  */
 package dao;
 
-
 import entidades.EntidadePai;
+import java.io.IOException;
 
 
 /**
@@ -15,9 +15,9 @@ import entidades.EntidadePai;
  * @param <T>
  */
 public interface Icadastro <T extends EntidadePai>{
-    public void inserir(T entidade);
-    public void alterar(T entidade);
-    public void deletar(T entidade);
+    public void inserir(T entidade) throws IOException;
+    public void alterar(T entidade) throws IOException;
+    public void deletar(T entidade) throws IOException;
      
     
 }
