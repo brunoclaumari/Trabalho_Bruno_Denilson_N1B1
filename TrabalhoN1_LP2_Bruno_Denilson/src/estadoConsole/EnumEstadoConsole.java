@@ -14,7 +14,9 @@ public enum EnumEstadoConsole {
     
     LOGIN_GERENTE(new EstadoLoginGerente()),
     
-    MENU_PRINCIPAL(new EstadoMenuPrincipal()),
+    MENU_OPCOES_GERENTE(new MenuOpcoesGerente()),
+    
+    MENU_OPCOES_VENDEDOR(new MenuOpcoesVendedor()),
     
     TELA_INICIAL(new EstadoTelaInicial()),
     

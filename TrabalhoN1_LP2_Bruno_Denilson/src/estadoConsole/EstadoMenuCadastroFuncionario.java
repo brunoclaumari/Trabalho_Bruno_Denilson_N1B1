@@ -20,9 +20,9 @@ public class EstadoMenuCadastroFuncionario extends MaqEstadoLogins {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("CADASTRO DE GERENTE, bem vindo!!!");
-        System.out.println("0 - Sair");
-        System.out.println("1 - Cadastrar Gerente");
-        System.out.println("2 - Cadastrar Vendedor");
+        System.out.println("0 - SAIR");
+        System.out.println("1 - CADASTRAR GERENTE");
+        System.out.println("2 - CADASTRAR VENDEDOR");
         System.out.println("--------------------------------");
 
         int resp = sc.nextInt();

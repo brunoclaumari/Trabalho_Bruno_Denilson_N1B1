@@ -11,10 +11,14 @@ import dao.PadraoDAO;
 import entidades.Gerente;
 import entidades.Usuario;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import telaInicial.Entrada;
+
+
 
 
 /**
@@ -25,32 +29,31 @@ public class TelaCadastroGerente extends MaqEstadoLogins {
 
     @Override
     public boolean Executar() {
-        boolean sair = false;       
-
+        boolean sair = false;           
+        
         ArrayList<Gerente> lista = new ArrayList<>();
         PadraoDAO DAO = new GerenteDao();
+        
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);       
 
-        //String json = null;
-
+        try {
+            lista = DAO.testeListagem(lista, DAO.getTypeParaListas());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaCadastroGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /*
         try {
             lista = DAO.transformaParaEntidade();
         } catch (IOException ex) {
             Logger.getLogger(TelaCadastroGerente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
 
         int idSugerido;
 
-        idSugerido = DAO.sugereId(lista);
-        /*
-         if (lista == null) {
-            idSugerido = 1;
-            //lista= new ArrayList<>();
-        } else {
-            idSugerido = lista.size() + 1;
-        }
-         */
+        idSugerido = DAO.sugereId(lista);       
 
         Gerente ger = new Gerente(idSugerido);
         Usuario usu = new Usuario();
@@ -74,14 +77,9 @@ public class TelaCadastroGerente extends MaqEstadoLogins {
 
             if (resp == 'S') {
                 String operacao=EnumTipoCrud.INCLUIR.getNomeDoArquivo();
-
-                DAO.SalvarDadosDAO(ger, operacao);
-                /*
-             lista.add(ger);
-            //json = DAO.MontaJson(lista);
-            DAO.escreveArquivoJson(lista);
-                 */
-                System.out.println("O arquivo foi escrito!!");
+                DAO.SalvarDadosDAO(ger, operacao);              
+                System.out.println("O arquivo foi escrito!!");  
+                Entrada.estadoMaq=EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
             }
         } catch (IOException e) {
             e.getMessage();
@@ -95,3 +93,9 @@ public class TelaCadastroGerente extends MaqEstadoLogins {
     }
 
 }
+  //DAO.SalvarDadosDAO(ger, operacao);
+                /*
+             lista.add(ger);
+            //json = DAO.MontaJson(lista);
+            DAO.escreveArquivoJson(lista);
+                 */

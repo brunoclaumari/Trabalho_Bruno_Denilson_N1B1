@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio;
+package lixo;
 
 import dao.PadraoDAO;
 import entidades.EntidadePai;
+import estadoConsole.EnumEstadoConsole;
 
 import java.io.IOException;
+import telaInicial.Entrada;
 
 
 /**
@@ -26,8 +28,18 @@ public class PadraoControl<T extends EntidadePai> {
 
     public void setDAO(PadraoDAO<T> DAO) {
         this.DAO = DAO;
-    }
+    }  
     
+    public void SalvarDados(T entidade, String operacao) throws IOException {
+
+        boolean dadosInvalidos = validaInclusao(entidade);
+        if (dadosInvalidos) {
+            System.out.println("Dados inválidos, cadastre novamente!");
+            Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_GERENTE.getEstadoMaq();
+        } else {
+            DAO.inserir(entidade);
+        }
+    }
     
     
     /**
@@ -46,7 +58,6 @@ public class PadraoControl<T extends EntidadePai> {
         if (entidade.getId() <= 0) {
             valorInvalido = true;
             System.out.println("Esse id é inválido");
-
         }
 
         return valorInvalido;

@@ -1,1 +1,3 @@
-[{"usuario":{"login":"bruno","senha":"123456"},"nome":"Bruno de Sousa Silva","id":1}]
+[{"usuario":{"login":"bruno","senha":"123456"},"nome":"Bruno de Sousa Silva","id":1},
+{"usuario":{"login":"654321","senha":"654321"},"nome":"Denilson","id":2},
+{"usuario":{"login":"ironman","senha":"123456"},"nome":"Tony Stark","id":3}]		

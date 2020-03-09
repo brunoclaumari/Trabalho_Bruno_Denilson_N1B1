@@ -15,6 +15,15 @@ public class Pedido extends EntidadePai {
 
     private Date data;
     private Funcionario funcionario;
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Date getData() {
         return data;

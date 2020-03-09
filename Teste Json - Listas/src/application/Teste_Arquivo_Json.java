@@ -83,13 +83,13 @@ public class Teste_Arquivo_Json {
             e.printStackTrace();
         }
 
-        String[] vet;
+        //String[] vet;
 
         js = gson.toJson(listaCli, listType);
         path = "listaCliente.json";
 
         //Imprime lista no arquivo, porém tem que subir o arquivo inteiro pois se houver
-        //adição de dados, será adicionada na classe e na lista e salvará porcima do arquivo que já existe
+        //adição de dados, será adicionada na classe e na lista e salvará por cima do arquivo que já existe
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             bw.write(js);
 
@@ -121,7 +121,7 @@ public class Teste_Arquivo_Json {
             }
         }
         
-
+		//Foreach do java!
         for (Cliente cli : leCliente) {
             System.out.println(cli.getId());
             System.out.println(cli.getNome());

@@ -21,9 +21,10 @@ public class EstadoTelaInicial extends MaqEstadoLogins {
         
         System.out.println("Olá, bem vindo ao nosso sistema");
         System.out.println("Escolha a opção desejada: ");
-        System.out.println("0 - Sair");
-        System.out.println("1 - Login de Vendedor");
-        System.out.println("2 - Login de Gerente");
+        System.out.println();
+        System.out.println("0 - SAIR");
+        System.out.println("1 - LOGIN DE VENDEDOR");
+        System.out.println("2 - LOGIN DE GERENTE");
         System.out.println("---------------------------------");
               
         

@@ -5,7 +5,6 @@
  */
 package estadoConsole;
 
-
 import dao.GerenteDao;
 import dao.PadraoDAO;
 import entidades.Gerente;
@@ -32,7 +31,7 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
 
         ArrayList<Gerente> gerentes = null;
 
-        System.out.println("Digite seus dados de Gerente!");
+        System.out.println("DIGITE SEUS DADOS DE GERENTE!");
         System.out.println("-----------------------------");
         System.out.println("LOGIN: ");
         usuario.setLogin(sc.nextLine());
@@ -43,7 +42,7 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         //ArrayList<Gerente> aux = new ArrayList<>();
 
         try {
-            gerentes = gDao.transformaParaEntidade();
+            gerentes = gDao.testeListagem(gerentes, gDao.getTypeParaListas());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -57,14 +56,38 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
 
         } else {
             for (Gerente ger : gerentes) {
-                senhaValida = ac.validaUsuario(ger.getUsuario(), usuario);               
-            }
-             if (senhaValida) {
-                    Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PRODUTO.getEstadoMaq();
-                } else {
-                    System.out.println("Dados usuario e senha inválidos!!");
-                    sair = true;
+                senhaValida = ac.validaUsuario(ger.getUsuario(), usuario);
+                if (senhaValida) {
+                    Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
+                    break;
                 }
+            }
+            if (!senhaValida) {
+                System.out.println("Dados usuario e senha inválidos!!\n");
+                char resp;
+
+                do {
+                    System.out.println("USUARIO GERENTE INVALIDO!!!!");
+                    System.out.println("VEJA AS OPÇÕES A SEGUIR: ");
+                    System.out.println("'C'     --PARA SE CADASTRAR--");
+                    System.out.println("'V' --PARA VOLTAR PARA O LOGIN--");
+                    System.out.println("'S'       --PARA SAIR--");
+                    System.out.println("------------------------------------");
+                    resp = sc.nextLine().toUpperCase().charAt(0);
+                } while (resp != 'C' && resp != 'V' && resp != 'S');
+
+                switch (resp) {
+                    case 'C':
+                        Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_GERENTE.getEstadoMaq();
+                        break;
+                    case 'V':
+                        Entrada.estadoMaq = EnumEstadoConsole.LOGIN_GERENTE.getEstadoMaq();
+                        break;
+                    case 'S':
+                        sair = true;
+                        break;
+                }                
+            }
         }
 
         return sair;

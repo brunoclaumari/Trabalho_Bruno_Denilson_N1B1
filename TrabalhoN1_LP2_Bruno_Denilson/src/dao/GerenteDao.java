@@ -6,22 +6,28 @@
 package dao;
 
 import EnumsArquivo.EnumArquivoTexto;
+import EnumsArquivo.EnumTypeToken;
+/*
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+*/
 
 import entidades.Gerente;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 
 import java.io.IOException;
+/*
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+*/
 
 /**
  *
@@ -31,6 +37,7 @@ public class GerenteDao extends PadraoDAO<Gerente> {
 
     public GerenteDao() {
         setTipoArquivo(EnumArquivoTexto.GERENTE.getNomeDoArquivo());
+        setTypeParaListas(EnumTypeToken.GERENTE.getTypeToken());
     }
 
     public GerenteDao(Class entidade) {
@@ -39,14 +46,32 @@ public class GerenteDao extends PadraoDAO<Gerente> {
 
     /**
      *
+     * @param entidade
      * @return //Pega um arquivo Json e transforma em uma lista de entidade
      * Gerente
      * @throws java.io.IOException
      *
      */
-    @Override
-    public ArrayList<Gerente> transformaParaEntidade() throws IOException {
-        ArrayList<Gerente> retornaLista = new ArrayList<>();
+ 
+
+   
+     @Override
+    public boolean validaInclusaoDAO(Gerente entidade) throws IOException {
+
+        boolean valorInvalido = super.validaInclusaoDAO(entidade);
+
+        if (entidade.getNome().isEmpty()) {
+            System.out.println("Não pode deixar nome vazio");
+            valorInvalido = true;
+        }
+        return valorInvalido;
+    }
+
+  /*
+      @Override
+    public ArrayList<Gerente> transformaParaEntidade(ArrayList<Gerente> retornaLista, Type type2) throws IOException {
+           
+        retornaLista = new ArrayList<>();
         Gson gson = new GsonBuilder().create();
         String caminho = getTipoArquivo();
 
@@ -55,7 +80,7 @@ public class GerenteDao extends PadraoDAO<Gerente> {
             System.out.println("Arquivo " + caminho + " criado!");
         } else {
             try (JsonReader reader = new JsonReader(new FileReader(caminho))) {
-                Type type2 = new TypeToken<ArrayList<Gerente>>() {
+                type2 = new TypeToken<ArrayList<Gerente>>() {
                 }.getType();
                 //lendo = br.readLine();
                 retornaLista = gson.fromJson(reader, type2);
@@ -67,23 +92,11 @@ public class GerenteDao extends PadraoDAO<Gerente> {
                 Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
-        return retornaLista;
+        return retornaLista;    
     }
-
-    @Override
-    public boolean validaInclusaoDAO(Gerente entidade) throws IOException {
-
-        boolean valorInvalido = super.validaInclusaoDAO(entidade);
-
-        if (entidade.getNome().isEmpty()) {
-            System.out.println("Não pode deixar nome vazio");
-            valorInvalido = true;
-        }
-        return valorInvalido;
-        //To change body of generated methods, choose Tools | Templates.
-
-    }
+    */
+    
+    
 
 }
 

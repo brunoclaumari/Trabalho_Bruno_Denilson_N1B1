@@ -9,15 +9,19 @@ package entidades;
  *
  * @author 082170034
  */
-public class Produto extends EntidadePai{
-    
+public class Produto extends EntidadePai {
+
     private String nome;
     private double preco;
+    private int quantEstoque;
+
+    public int getQuantidade() {
+        return quantEstoque;
+    }
 
     public Produto(int id) {
         super(id);
     }
-   
 
     public String getNome() {
         return nome;
@@ -34,5 +38,13 @@ public class Produto extends EntidadePai{
     public void setPreco(double preco) {
         this.preco = preco;
     }
-    
+
+    public void addEstoque(int quant) {
+        quantEstoque += quant;
+    }
+
+    public void removeEstoque(int quant) {
+        quantEstoque -= quant;
+    }
+
 }
