@@ -78,7 +78,7 @@ public class TelaCadastroGerente extends MaqEstadoLogins {
             if (resp == 'S') {
                 String operacao=EnumTipoCrud.INCLUIR.getNomeDoArquivo();
                 DAO.SalvarDadosDAO(ger, operacao);              
-                System.out.println("O arquivo foi escrito!!");  
+                //System.out.println("O arquivo foi escrito!!");  
                 Entrada.estadoMaq=EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
             }
         } catch (IOException e) {

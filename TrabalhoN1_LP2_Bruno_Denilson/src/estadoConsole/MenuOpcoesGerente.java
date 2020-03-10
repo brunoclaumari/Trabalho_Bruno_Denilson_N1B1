@@ -5,6 +5,9 @@
  */
 package estadoConsole;
 
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import telaInicial.Entrada;
 
@@ -14,22 +17,38 @@ import telaInicial.Entrada;
  */
 public class MenuOpcoesGerente extends MaqEstadoLogins {
 
+    public MenuOpcoesGerente() {
+        setUsuLogado("gerente");
+    }
+
     @Override
     public boolean Executar() {
+        //quemTaLogado=getUsuLogado();
+
         boolean sair = false;
         Scanner sc = new Scanner(System.in);
+        int alternativa = 0;
 
-        System.out.println("MENU DE OPCOES - GERENCIA");
-        System.out.println("Escolha a opção desejada: ");
-        System.out.println("0 - SAIR");
-        System.out.println("1 - CADASTRAR FUNCIONARIOS");
-        System.out.println("2 - CADASTRAR CLIENTES");
-        System.out.println("3 - CADASTRAR PRODUTOS");
-        System.out.println("4 - CADASTRAR PEDIDOS");
+        List<Integer> listOpcoes = Arrays.asList(0, 1, 2, 3, 4);
 
-        System.out.println("---------------------------------");
+        try {
+            do {
+                System.out.println("MENU DE OPCOES - GERENCIA");
+                System.out.println("Escolha a opção desejada: ");
+                System.out.println("0 - SAIR");
+                System.out.println("1 - CADASTRAR FUNCIONARIOS");
+                System.out.println("2 - CADASTRAR CLIENTES");
+                System.out.println("3 - CADASTRAR PRODUTOS");
+                System.out.println("4 - CADASTRAR PEDIDOS");
+                System.out.println("---------------------------------");
 
-        int alternativa = sc.nextInt();
+                alternativa = sc.nextInt();
+            } while (!listOpcoes.contains(alternativa));
+        } catch (InputMismatchException e) {
+            alternativa = -1;
+            e.getMessage();
+            System.out.println("DIGITE APENAS OS NUMEROS INFORMADOS NO MENU!!!\n");
+        }
 
         //MaqEstadoLogins estadoMaq;
         switch (alternativa) {
@@ -42,10 +61,10 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
             case 2:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_CLIENTE.getEstadoMaq();
                 break;
-            case 3:
+            case 3:                
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PRODUTO.getEstadoMaq();
                 break;
-            case 4:
+            case 4:                
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PEDIDO.getEstadoMaq();
                 break;
         }

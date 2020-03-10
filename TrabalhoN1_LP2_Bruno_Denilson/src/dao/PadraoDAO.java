@@ -114,7 +114,7 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
                 type2 = getTypeParaListas();
                 //lendo = br.readLine();
                 retornaLista = gson.fromJson(reader, type2);
-                System.out.println("O arquivo existe e foi lido");
+                //System.out.println("O arquivo existe e foi lido\n");
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -15,14 +15,21 @@ import estadoConsole.MaqEstadoLogins;
 public class Entrada {
 
     public static MaqEstadoLogins estadoMaq;
+    
+    public static String usuarioLogado;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        String quemTaLogado;
         estadoMaq = EnumEstadoConsole.TELA_INICIAL.getEstadoMaq();
         boolean saindo = false;
         while (!saindo) {
+            if(estadoMaq.getUsuLogado()!=null){
+                usuarioLogado=estadoMaq.getUsuLogado();
+            }
+            //quemTaLogado=usuarioLogado;
             saindo = estadoMaq.Executar();
         }
         System.out.println("SAINDO DO SISTEMA, OBRIGADO!!!!");
@@ -30,3 +37,5 @@ public class Entrada {
     }
 
 }
+
+

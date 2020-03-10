@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import telaInicial.Entrada;
 
 /**
  *
@@ -27,7 +28,7 @@ public class TelaCadastroCliente extends MaqEstadoLogins {
         ArrayList<Cliente> lista = new ArrayList<>();
         PadraoDAO DAO = new ClienteDao();
 
-        Scanner sc = new Scanner(System.in);       
+        Scanner sc = new Scanner(System.in);
 
         try {
             lista = DAO.testeListagem(lista, DAO.getTypeParaListas());
@@ -37,14 +38,14 @@ public class TelaCadastroCliente extends MaqEstadoLogins {
 
         int idSugerido;
 
-        idSugerido = DAO.sugereId(lista);       
+        idSugerido = DAO.sugereId(lista);
 
         Cliente cli = new Cliente(idSugerido);
-        
+
         try {
             System.out.println("Bem vindo ao cadastro de Cliente");
             System.out.println("Digite o nome: ");
-            cli.setNome(sc.nextLine());          
+            cli.setNome(sc.nextLine());
 
             char resp;
 
@@ -56,7 +57,15 @@ public class TelaCadastroCliente extends MaqEstadoLogins {
             if (resp == 'S') {
                 String operacao = EnumTipoCrud.INCLUIR.getNomeDoArquivo();
                 DAO.SalvarDadosDAO(cli, operacao);
-                System.out.println("O arquivo foi escrito!!");
+                
+                //condiciona o menu ao tipo de usuario logado                
+                if (Entrada.usuarioLogado.equals("gerente")) {
+                    Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
+                }
+                else{
+                    Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_VENDEDOR.getEstadoMaq();
+                }
+
             }
         } catch (IOException e) {
             e.getMessage();

@@ -5,14 +5,25 @@
  */
 package estadoConsole;
 
+import telaInicial.Entrada;
+
 /**
  *
  * @author bruna
  */
 public class EstadoLoginVendedor extends MaqEstadoLogins{
 
+    public EstadoLoginVendedor() {
+        setUsuLogado("vendedor");
+    }  
+  
+    
+
     @Override
     public boolean Executar() {
+        //quemTaLogado=getUsuLogado();
+        Entrada.usuarioLogado=getUsuLogado();
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

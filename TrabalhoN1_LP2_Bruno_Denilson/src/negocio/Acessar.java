@@ -5,7 +5,7 @@
  */
 package negocio;
 
-import entidades.Funcionario;
+
 import entidades.Usuario;
 
 /**
