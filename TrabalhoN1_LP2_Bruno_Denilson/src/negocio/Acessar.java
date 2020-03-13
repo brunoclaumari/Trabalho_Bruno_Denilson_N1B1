@@ -5,7 +5,7 @@
  */
 package negocio;
 
-import entidades.Funcionario;
+
 import entidades.Usuario;
 
 /**
@@ -26,7 +26,8 @@ public class Acessar {
         }
 
         return usuValido;
-
     }
+    
+    
 
 }

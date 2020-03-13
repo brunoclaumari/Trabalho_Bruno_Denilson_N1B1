@@ -17,7 +17,7 @@ import java.io.IOException;
 public interface Icadastro <T extends EntidadePai>{
     public void inserir(T entidade) throws IOException;
     public void alterar(T entidade) throws IOException;
-    public void deletar(T entidade) throws IOException;
+    public void deletar(int id) throws IOException;
      
     
 }

@@ -15,6 +15,10 @@ public class Produto extends EntidadePai {
     private double preco;
     private int quantEstoque;
 
+    public Produto() {
+
+    }
+
     public int getQuantidade() {
         return quantEstoque;
     }
@@ -45,6 +49,14 @@ public class Produto extends EntidadePai {
 
     public void removeEstoque(int quant) {
         quantEstoque -= quant;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: " + getId() + "-"
+                + "Nome: " + getNome() + "-"
+                + "Preço: " + getPreco() + "-"
+                + "Quantidade: " + getQuantidade();
     }
 
 }

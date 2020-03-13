@@ -5,15 +5,44 @@
  */
 package estadoConsole;
 
+
+import dao.PadraoDAO;
+import dao.VendedorDao;
+
+import entidades.Vendedor;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.TelaCadastrarPadrao;
+
 /**
  *
  * @author 082170034
  */
 public class TelaCadastroVendedor extends MaqEstadoLogins {
 
-    @Override
+   @Override
     public boolean Executar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean sair = false;
+
+        ArrayList<Vendedor> lista = new ArrayList<>();
+        PadraoDAO DAO = new VendedorDao();        
+        String nomeDaClasse = Vendedor.class.getSimpleName().toUpperCase();
+        
+        try {
+            lista = DAO.testeListagem(lista, DAO.getTypeParaListas());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaCadastroVendedor.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        Vendedor entidade = new Vendedor(DAO.sugereId(lista));
+
+        TelaCadastrarPadrao montaCadastrar = new TelaCadastrarPadrao();
+
+        sair = montaCadastrar.MontaTelaParaCadastrar(lista, DAO, entidade, sair, nomeDaClasse);
+
+        return sair;
     }
     
 }

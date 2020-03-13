@@ -39,4 +39,13 @@ public class Pedido extends EntidadePai {
         this.funcionario = funcionario;
     }
 
+    @Override
+    public String toString() {
+        return "Id: " + getId() + "-"
+                + "Data: " + String.format("dd/MM/yyyy", getData()) + "-"
+                + "Id_Funcionario: " + funcionario.getId()+ "-"
+                + "Nome: " + funcionario.getNome()+ "-"
+                + "Cliente: " + cliente.getNome();
+    }
+
 }
