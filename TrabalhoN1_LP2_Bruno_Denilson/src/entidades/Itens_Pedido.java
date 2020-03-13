@@ -5,6 +5,11 @@
  */
 package entidades;
 
+import dao.ProdutoDao;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author BRUNOSILVA
@@ -54,6 +59,23 @@ public class Itens_Pedido extends EntidadePai {
 
     public double subTotal() {
         return quantidade * preco;
+    }
+
+    @Override
+    @SuppressWarnings("null")
+    public String toString() {
+        ProdutoDao DAO=new ProdutoDao();
+        Produto prod = null;
+        try {
+            prod = DAO.consultar(getId_Produto());
+        } catch (IOException ex) {
+            Logger.getLogger(Itens_Pedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "Produto: " + prod.getNome() + "-"
+                + "Quantidade: " + getQuantidade() + "-"
+                + "Preço: R$" + getPreco() + "-"
+                + "Subtotal: " + subTotal();
     }
 
 }

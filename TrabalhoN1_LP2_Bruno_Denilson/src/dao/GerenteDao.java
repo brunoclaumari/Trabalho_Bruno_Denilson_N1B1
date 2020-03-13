@@ -43,17 +43,8 @@ public class GerenteDao extends PadraoDAO<Gerente> {
     public GerenteDao(Class entidade) {
         super(entidade);
     }
-
-    /**
-     *
-     * @param entidade
-     * @return //Pega um arquivo Json e transforma em uma lista de entidade
-     * Gerente
-     * @throws java.io.IOException
-     *
-     */
  
-
+ 
    
      @Override
     public boolean validaInclusaoDAO(Gerente entidade) throws IOException {

@@ -12,6 +12,10 @@ package entidades;
 public class Funcionario extends EntidadePai {
     
     private String nome;  
+    
+     public Funcionario() {
+        
+    }
 
     public Funcionario(int id) {
         super(id);

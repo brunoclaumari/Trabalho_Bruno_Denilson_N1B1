@@ -5,6 +5,9 @@
  */
 package estadoConsole;
 
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import telaInicial.Entrada;
 
@@ -14,22 +17,46 @@ import telaInicial.Entrada;
  */
 public class MenuOpcoesGerente extends MaqEstadoLogins {
 
+    public MenuOpcoesGerente() {
+        setUsuLogado("gerente");
+    }
+
     @Override
     public boolean Executar() {
+        //quemTaLogado=getUsuLogado();
+
         boolean sair = false;
         Scanner sc = new Scanner(System.in);
+        int alternativa = 0;
 
-        System.out.println("MENU DE OPCOES - GERENCIA");
-        System.out.println("Escolha a opção desejada: ");
-        System.out.println("0 - SAIR");
-        System.out.println("1 - CADASTRAR FUNCIONARIOS");
-        System.out.println("2 - CADASTRAR CLIENTES");
-        System.out.println("3 - CADASTRAR PRODUTOS");
-        System.out.println("4 - CADASTRAR PEDIDOS");
+        List<Integer> listOpcoes = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        System.out.println("---------------------------------");
+        try {
+            do {
+                System.out.println("---------------------------------");
+                System.out.println("---------------------------------");
+                System.out.println("MENU DE OPCOES - GERENCIA");
+                System.out.println("Escolha a opção desejada: ");
+                System.out.println("0 -  SAIR");
+                System.out.println("1 -  CADASTRAR FUNCIONARIOS");
+                System.out.println("2 -  CADASTRAR CLIENTES");
+                System.out.println("3 -  CADASTRAR PRODUTOS");
+                System.out.println("4 -  CADASTRAR PEDIDOS");
+                System.out.println("5 -  ALTERAR CLIENTES");
+                System.out.println("6 -  ALTERAR PRODUTOS");
+                System.out.println("7 -  ALTERAR PEDIDOS");
+                System.out.println("8 -  DELETAR CLIENTES");
+                System.out.println("9 -  DELETAR PRODUTOS");
+                System.out.println("10 - DELETAR PEDIDOS");
+                System.out.println("---------------------------------");
 
-        int alternativa = sc.nextInt();
+                alternativa = sc.nextInt();
+            } while (!listOpcoes.contains(alternativa));
+        } catch (InputMismatchException e) {
+            alternativa = -1;
+            e.getMessage();
+            System.out.println("DIGITE APENAS OS NUMEROS INFORMADOS NO MENU!!!\n");
+        }
 
         //MaqEstadoLogins estadoMaq;
         switch (alternativa) {
@@ -48,6 +75,26 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
             case 4:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PEDIDO.getEstadoMaq();
                 break;
+                 case 5:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_CLIENTE.getEstadoMaq();
+                break;
+            case 6:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_PRODUTO.getEstadoMaq();
+                break;
+            case 7:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_PEDIDO.getEstadoMaq();
+                break;
+                 case 8:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_CLIENTE.getEstadoMaq();
+                break;
+            case 9:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_PRODUTO.getEstadoMaq();
+                break;
+            case 10:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_PEDIDO.getEstadoMaq();
+                break;
+                
+
         }
         return sair;
     }

@@ -11,4 +11,22 @@ package estadoConsole;
  */
 public abstract class MaqEstadoLogins {
     public abstract boolean Executar();
+
+    public MaqEstadoLogins() {
+        
+    }
+       
+        
+    //variavel para passar que tipo de usuario está de tela em tela
+    private String usuLogado;
+
+    public String getUsuLogado() {
+        return usuLogado;
+    }
+
+    public void setUsuLogado(String usuLogado) {
+        this.usuLogado = usuLogado;
+    }    
+    
+
 }

@@ -5,17 +5,43 @@
  */
 package estadoConsole;
 
+import dao.PadraoDAO;
+import dao.ProdutoDao;
+
+import entidades.Produto;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.TelaCadastrarPadrao;
+
 /**
  *
  * @author 082170034
  */
 public class TelaCadastroProduto extends MaqEstadoLogins {
 
-    @Override
+   @Override
     public boolean Executar() {
-        boolean sair=false;
+        boolean sair = false;
+
+        ArrayList<Produto> lista = new ArrayList<>();
+        PadraoDAO DAO = new ProdutoDao();        
+        String nomeDaClasse = Produto.class.getSimpleName().toUpperCase();
         
-        System.out.println("Bem vindo ao cadastro de PRODUTOS!!");
+        try {
+            lista = DAO.testeListagem(lista, DAO.getTypeParaListas());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
+        Produto entidade = new Produto(DAO.sugereId(lista));
+
+        TelaCadastrarPadrao montaCadastrar = new TelaCadastrarPadrao();
+
+        sair = montaCadastrar.MontaTelaParaCadastrar(lista, DAO, entidade, sair, nomeDaClasse);
+
         return sair;
     }
     

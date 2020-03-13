@@ -26,13 +26,7 @@ public class ProdutoDao extends PadraoDAO<Produto> {
         super(entidade);
     }
 
-    /**
-     *
-     * @param entidade
-     * @return //Pega um arquivo Json e transforma em uma lista de entidade Produto
-     * @throws java.io.IOException
-     *
-     */
+  
     
     @Override
     public boolean validaInclusaoDAO(Produto entidade) throws IOException {

@@ -13,6 +13,10 @@ public class Gerente extends Funcionario {
 
     private Usuario usuario;
 
+    public Gerente() {
+        
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -27,10 +31,9 @@ public class Gerente extends Funcionario {
     
     @Override
     public String toString(){
-        String imp= String.format(" id: %d \n "
-                + "name: %s \n"
-                + "login: %s \n"
-                + "senha: %s", getId(),getNome(),getUsuario().getLogin(),getUsuario().getSenha());
+        String imp= String.format(" id: %d - "
+                + "name: %s - "
+                + "login: %s", getId(),getNome(),getUsuario().getLogin());
         return imp;
     }
 

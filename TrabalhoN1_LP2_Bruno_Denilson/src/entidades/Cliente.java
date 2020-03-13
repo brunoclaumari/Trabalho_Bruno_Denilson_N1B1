@@ -17,6 +17,10 @@ public class Cliente extends EntidadePai {
     public Cliente(int id) {
         super(id);
     }     
+
+    public Cliente() {
+       
+    }
       
 
     public String getNome() {

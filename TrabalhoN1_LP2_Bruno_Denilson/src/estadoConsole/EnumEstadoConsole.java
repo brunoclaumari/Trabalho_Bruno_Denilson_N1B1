@@ -5,6 +5,8 @@
  */
 package estadoConsole;
 
+import lixo.TesteTelaCadastroGerente;
+
 /**
  *
  * @author BRUNOSILVA
@@ -30,7 +32,27 @@ public enum EnumEstadoConsole {
     
     CADASTRA_PRODUTO(new TelaCadastroProduto()),
     
-    CADASTRA_PEDIDO(new TelaCadastroPedido())
+    CADASTRA_PEDIDO(new TelaCadastroPedido()),
+    
+    DELETAR_GERENTE(new TelaDeletarGerente()),
+    
+    DELETAR_VENDEDOR(new TelaDeletarVendedor()),
+    
+    DELETAR_CLIENTE(new TelaDeletarCliente()),
+    
+    DELETAR_PRODUTO(new TelaDeletarProduto()),
+    
+    DELETAR_PEDIDO(new TelaDeletarPedido()),
+    
+    ALTERAR_GERENTE(new TelaEditarGerente()),
+    
+    ALTERAR_VENDEDOR(new TelaEditarVendedor()),
+    
+    ALTERAR_CLIENTE(new TelaEditarCliente()),
+    
+    ALTERAR_PRODUTO(new TelaEditarProduto()),
+    
+    ALTERAR_PEDIDO(new TelaEditarPedido()),
     ;
 
     private final MaqEstadoLogins estadoMaq;

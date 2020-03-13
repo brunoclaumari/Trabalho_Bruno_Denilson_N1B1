@@ -20,10 +20,17 @@ import telaInicial.Entrada;
  *
  * @author bruna
  */
-public class EstadoLoginGerente extends MaqEstadoLogins {
+public class EstadoLoginGerente extends MaqEstadoLogins {   
 
+    
+    EstadoLoginGerente() {
+        setUsuLogado("gerente");
+    }
+        
+   
     @Override
-    public boolean Executar() {
+    public boolean Executar() {        
+                
         boolean sair = false;
         boolean senhaValida = false;
         Scanner sc = new Scanner(System.in);
@@ -39,6 +46,8 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         usuario.setSenha(sc.nextLine());
 
         PadraoDAO gDao = new GerenteDao();
+        
+        Entrada.usuario=usuario;
         //ArrayList<Gerente> aux = new ArrayList<>();
 
         try {
@@ -52,6 +61,7 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         if (gerentes == null || gerentes.isEmpty()) {
             System.out.println("A lista de gerentes está vazia, "
                     + "cadastre um gerente!\n");
+            //Entrada.usuarioLogado=getUsuLogado();
             Entrada.estadoMaq = EnumEstadoConsole.CADASTRAR_FUNCIONARIO.getEstadoMaq();
 
         } else {
@@ -92,5 +102,7 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
 
         return sair;
     }
+
+   
 
 }

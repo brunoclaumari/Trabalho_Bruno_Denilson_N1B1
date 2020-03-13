@@ -26,14 +26,7 @@ public class ClienteDao extends PadraoDAO<Cliente> {
         super(entidade);
     }
 
-    /**
-     *
-     * @param entidade
-     * @return //Pega um arquivo Json e transforma em uma lista de entidade
-     * Cliente
-     * @throws java.io.IOException
-     *
-     */ 
+  
    
     @Override
     public boolean validaInclusaoDAO(Cliente entidade) throws IOException {

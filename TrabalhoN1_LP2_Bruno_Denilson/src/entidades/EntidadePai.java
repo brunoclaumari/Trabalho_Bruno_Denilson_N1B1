@@ -11,6 +11,10 @@ package entidades;
  */
 public class EntidadePai {
     private int id;
+    
+    public EntidadePai() {
+        
+    }  
 
     public EntidadePai(int id) {
         this.id = id;
