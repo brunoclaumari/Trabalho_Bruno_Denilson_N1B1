@@ -28,9 +28,12 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
     }
         
    
-    @Override
-    public boolean Executar() {        
-                
+    @Override                  
+    public boolean Executar() {
+        
+        //quemTaLogado=getUsuLogado();
+        
+
         boolean sair = false;
         boolean senhaValida = false;
         Scanner sc = new Scanner(System.in);

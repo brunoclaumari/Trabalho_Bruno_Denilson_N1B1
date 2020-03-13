@@ -19,6 +19,7 @@ public class Entrada {
     public static MaqEstadoLogins estadoMaq;
     
     public static String usuarioLogado;
+<<<<<<< HEAD
     
     public static Usuario usuario; 
     
@@ -39,13 +40,18 @@ public class Entrada {
         }
     }
     
+=======
+>>>>>>> a761bec3a6727eb1cbd6112fe8ddd7a628c93ae1
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         String quemTaLogado;
+<<<<<<< HEAD
         clearConsole();
+=======
+>>>>>>> a761bec3a6727eb1cbd6112fe8ddd7a628c93ae1
         estadoMaq = EnumEstadoConsole.TELA_INICIAL.getEstadoMaq();
         boolean saindo = false;
         while (!saindo) {
@@ -53,7 +59,10 @@ public class Entrada {
                 usuarioLogado=estadoMaq.getUsuLogado();
             }
             //quemTaLogado=usuarioLogado;
+<<<<<<< HEAD
             clearConsole();
+=======
+>>>>>>> a761bec3a6727eb1cbd6112fe8ddd7a628c93ae1
             saindo = estadoMaq.Executar();
         }
         System.out.println("SAINDO DO SISTEMA, OBRIGADO!!!!");

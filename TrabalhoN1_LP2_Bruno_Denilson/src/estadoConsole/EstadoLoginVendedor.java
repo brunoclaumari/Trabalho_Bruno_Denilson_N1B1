@@ -5,6 +5,7 @@
  */
 package estadoConsole;
 
+
 import dao.PadraoDAO;
 import dao.VendedorDao;
 import entidades.Usuario;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import negocio.Acessar;
+
 import telaInicial.Entrada;
 
 /**
@@ -26,6 +28,7 @@ public class EstadoLoginVendedor extends MaqEstadoLogins{
     }  
   
     
+
 
    @Override
     public boolean Executar() {        
@@ -97,6 +100,6 @@ public class EstadoLoginVendedor extends MaqEstadoLogins{
         }
 
         return sair;
-    }
+
     
 }
