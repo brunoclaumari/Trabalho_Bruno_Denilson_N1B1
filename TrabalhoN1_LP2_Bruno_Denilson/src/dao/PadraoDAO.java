@@ -28,13 +28,16 @@ import java.io.FileReader;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import telaInicial.Entrada;
 
@@ -47,8 +50,7 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
 
     public PadraoDAO() {
 
-    }    
-    
+    }
 
     public PadraoDAO(Class<T> entidade) {
         this.entidade = entidade;
@@ -108,7 +110,6 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
      * @return Método abstrato que transforma um Json em uma lista de Entidades
      * @throws java.io.IOException
      */
-   
     //NOVO TESTE PARA O GENERICS
     public ArrayList<T> testeListagem(ArrayList<T> retornaLista, Type type2) throws IOException {
 
@@ -124,12 +125,11 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
                 type2 = getTypeParaListas();
                 //lendo = br.readLine();
                 retornaLista = gson.fromJson(reader, type2);
-                //System.out.println("O arquivo existe e foi lido\n");
 
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PadraoDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PadraoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return retornaLista;
@@ -150,9 +150,10 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
     public void escreveArquivoJson(ArrayList<T> listaEntidades) {
         String caminho = getTipoArquivo();
         String js = MontaJson(listaEntidades);
-        
-        Date data=new Date(System.currentTimeMillis());
-        String controleDeSeguranca="Arquivo "+getTipoArquivo()+" alterado dia "+data.toString();
+
+        Date data = new Date(System.currentTimeMillis());
+        DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy , HH:mm:ss");
+        String controleDeSeguranca = " Arquivo " + getTipoArquivo() + " alterado dia " + formatDate.format(data);
 
         //Imprime lista no arquivo, porém tem que subir o arquivo inteiro pois se houver
         //adição de dados, será adicionada na classe e na lista e salvará porcima do arquivo que já existe
@@ -161,17 +162,16 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
 
         } catch (IOException e) {
             e.getMessage();
-        }        
-        
-         try (BufferedWriter bw = new BufferedWriter(new FileWriter("Sistema de Controle de Segurança.txt",true))) {
-            bw.append(controleDeSeguranca+"\n");
+        }
+
+        try (PrintWriter bw = new PrintWriter(new FileWriter("Sistema de Controle de Segurança.txt", true))) {
+            bw.println(controleDeSeguranca);
 
         } catch (IOException e) {
             e.getMessage();
         }
     }
 
-    //Lê um arquivo Json e retorna uma lista de entidades
     /**
      *
      * @param id
@@ -187,14 +187,16 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         if (cons == null || cons.isEmpty()) {
             return null;
         } else {
+            //retorno = (T) cons.stream().filter(x -> x.getId() == id);
+
             for (T ent : cons) {
                 if (ent.getId() == id) {
                     retorno = ent;
                     break;
                 }
             }
-        }
 
+        }
         return retorno;
     }
 
@@ -243,7 +245,9 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
      * @throws IOException
      */
     public boolean validaExclusaoDAO(T entidade) throws IOException {
-        boolean valorValido = true;        
+        boolean valorValido = true;
+
+        Scanner sc = new Scanner(System.in);
 
         PedidoDao pedidoDao = new PedidoDao();
         Itens_PedidoDao itensDao = new Itens_PedidoDao();
@@ -257,28 +261,39 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
 
         if (pedidos != null && itens != null) {
             if (entidade instanceof Funcionario) {
-                //testa se Funcionario, ou os filhos estão na lista
+                //testa se Funcionario, ou os filhos estão na lista de pedidos
                 for (Pedido ped : pedidos) {
                     if (ped.getFuncionario().equals(entidade)) {
                         valorValido = false;
-                        System.out.println("Não é possível excluir o" + entidade.getClass().getName());
+                        System.out.println("Não é possível excluir o " + Funcionario.class.getSimpleName()
+                                + ", ele existe em um pedido");
+                        System.out.println("Pressione qualquer tecla para continuar");
+                        sc.nextLine();
                         break;
                     }
                 }
-
+                //testa se Cliente estão na lista de pedidos
             } else if (entidade instanceof Cliente) {
                 for (Pedido ped : pedidos) {
-                    while (ped.getCliente().equals(entidade)) {
+                    if (ped.getCliente().equals(entidade)) {
                         valorValido = false;
-                        System.out.println("Não é possível excluir o" + entidade.getClass().getName());
+                        System.out.println("Não é possível excluir o " + Cliente.class.getSimpleName()
+                                + ", ele existe em um pedido");
+                        System.out.println("Pressione qualquer tecla para continuar");
+                        sc.nextLine();
+                        break;
                     }
 
-                }
+                }//testa se Produto estão na lista de pedidos
             } else if (entidade instanceof Produto) {
                 for (Itens_Pedido ped : itens) {
-                    while (ped.getId_Produto() == entidade.getId()) {
+                    if (ped.getId_Produto() == entidade.getId()) {
                         valorValido = false;
-                        System.out.println("Não é possível excluir o" + entidade.getClass().getName());
+                        System.out.println("Não é possível excluir o " + Produto.class.getSimpleName()
+                                + ", ele existe em um pedido");
+                        System.out.println("Pressione qualquer tecla para continuar");
+                        sc.nextLine();
+                        break;
                     }
                 }
             } else {
@@ -334,7 +349,6 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         }
         arquivoLido.add((T) p);
         escreveArquivoJson(arquivoLido);
-        System.out.println("Arquivo escrito com sucesso");
 
     }
 
@@ -354,7 +368,6 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         arquivoLido.remove(indice);
         arquivoLido.add(indice, (T) p);
         escreveArquivoJson(arquivoLido);
-        System.out.println("Arquivo selecionado alterado com sucesso");
 
     }
 
@@ -366,12 +379,6 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         // T item = consultar(id);
         arquivoLido.removeIf((T it) -> it.getId() == id);
         escreveArquivoJson(arquivoLido);
-        /*
-         T teste = consultar(id);
-        arquivoLido.remove(teste);
-         */
-
-        System.out.println("Item indicado removido do arquivo com sucesso");
 
     }
 
@@ -389,119 +396,5 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         }
         return idSug;
     }
-
 }
 
-
-/*//Esquema para alterar elementos na lista
-        Funcionario antigo=(Funcionario) fOrdenado.stream().filter(x->x.getSalario()==teste.getSalario()).findAny().get();
-        int indice=fOrdenado.indexOf(antigo);
-        
-        fOrdenado.remove(indice);
-        fOrdenado.add(indice, teste);
- */
-//Pega um arquivo Json e transforma em uma lista de entidade
-/*
-         public ArrayList<T> MontaListaDeEntidades(T entidade) {
-        ArrayList<T> listaArquivo = null;
-        try {
-            listaArquivo = listar();
-            listaArquivo.add(entidade);
-        } catch (IOException ex) {
-            Logger.getLogger(GerenteDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listaArquivo;
-    } 
- */
-//---------------------------------------------------------------------------------------------
-/**
- *
- * @return Método retorna uma lista da entidade atual a partir do arquivo Json,
- * porém não dá para serializar pois este é genérico
- * @throws IOException
- */
-
-/*
-public ArrayList<T> listar() throws IOException {
-        Gson gson = new GsonBuilder().create();
-        //Gson gson = new Gson();
-         ArrayList<T> listaArquivo = new ArrayList<>();
-        String caminho = getTipoArquivo();
-
-        if (!new File(caminho).exists()) {
-            new File(caminho).createNewFile();
-            //System.out.println("O arquivo não existe e foi criado");
-
-        } else {
-            try (JsonReader reader = new JsonReader(new FileReader(caminho))) {
-
-                Type type2 = new TypeToken<ArrayList<T>>() {
-                }.getType();         
-                  
-                listaArquivo = gson.fromJson(reader, type2); 
-
-                System.out.println("O arquivo existe e foi lido\n");
-
-            } catch (IOException e) {
-                e.getMessage();
-            } catch (Exception e) {
-                e.getMessage();
-            }
-        }
-        return listaArquivo;
-    }
- */
-
- /*
-
-
-
-//ULTIMO QUE ESTAVA DANDO CERTO
- public String MontaJson(ArrayList<T> listaEntidades) {
-        Gson gson = new GsonBuilder().create();
-        //String caminho = getTipoArquivo();
-        Type listType = new TypeToken<ArrayList<T>>() {
-        }.getType();
-        String js = gson.toJson(listaEntidades, listType);
-
-        return js;
-    }
-
--------------------------------------------------------------
-
- public T consultar(int id) throws IOException {
-        ArrayList<T> cons = transformaParaEntidade();
-
-        T retorno = null;
-
-        if (cons == null || cons.isEmpty()) {
-            return null;
-        } else {
-            for (T ent : cons) {
-                if (ent.getId() == id) {
-                    retorno = ent;
-                    break;
-                }
-            }
-        }
-
-        return retorno;
-    }
-
------------------------------------------------
-
- public void inserir(EntidadePai p) throws IOException {
-
-        ArrayList<T> arquivoLido = transformaParaEntidade();
-
-        //Testa se está nulo, pois aí será instanciado
-        if (arquivoLido == null) {
-            arquivoLido = new ArrayList<>();
-        }
-        arquivoLido.add((T) p);
-        escreveArquivoJson(arquivoLido);
-        System.out.println("Arquivo escrito com sucesso");
-
-    }
-
- */

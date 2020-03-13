@@ -72,10 +72,10 @@ public class Itens_Pedido extends EntidadePai {
             Logger.getLogger(Itens_Pedido.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return "Produto: " + prod.getNome() + "-"
-                + "Quantidade: " + getQuantidade() + "-"
-                + "Preço: R$" + getPreco() + "-"
-                + "Subtotal: " + subTotal();
+        return "Produto: " + prod.getNome() + " - "
+                + "Quantidade: " + getQuantidade() + " - "
+                + "Preço: R$ " + String.format("%.2f", getPreco())  + " - "
+                + "Subtotal: R$ " + String.format("%.2f",subTotal());
     }
 
 }

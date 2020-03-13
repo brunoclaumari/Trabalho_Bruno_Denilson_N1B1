@@ -5,7 +5,7 @@
  */
 package estadoConsole;
 
-import lixo.TesteTelaCadastroGerente;
+
 
 /**
  *
@@ -13,47 +13,25 @@ import lixo.TesteTelaCadastroGerente;
  */
 public enum EnumEstadoConsole {
     LOGIN_VENDEDOR(new EstadoLoginVendedor()),
-    
     LOGIN_GERENTE(new EstadoLoginGerente()),
-    
     MENU_OPCOES_GERENTE(new MenuOpcoesGerente()),
-    
     MENU_OPCOES_VENDEDOR(new MenuOpcoesVendedor()),
-    
     TELA_INICIAL(new EstadoTelaInicial()),
-    
     CADASTRAR_FUNCIONARIO(new EstadoMenuCadastroFuncionario()),
-    
     CADASTRA_GERENTE(new TelaCadastroGerente()),
-    
     CADASTRA_VENDEDOR(new TelaCadastroVendedor()),
-    
     CADASTRA_CLIENTE(new TelaCadastroCliente()),
-    
     CADASTRA_PRODUTO(new TelaCadastroProduto()),
-    
     CADASTRA_PEDIDO(new TelaCadastroPedido()),
-    
     DELETAR_GERENTE(new TelaDeletarGerente()),
-    
     DELETAR_VENDEDOR(new TelaDeletarVendedor()),
-    
     DELETAR_CLIENTE(new TelaDeletarCliente()),
-    
     DELETAR_PRODUTO(new TelaDeletarProduto()),
-    
     DELETAR_PEDIDO(new TelaDeletarPedido()),
-    
     ALTERAR_GERENTE(new TelaEditarGerente()),
-    
     ALTERAR_VENDEDOR(new TelaEditarVendedor()),
-    
     ALTERAR_CLIENTE(new TelaEditarCliente()),
-    
-    ALTERAR_PRODUTO(new TelaEditarProduto()),
-    
-    ALTERAR_PEDIDO(new TelaEditarPedido()),
-    ;
+    ALTERAR_PRODUTO(new TelaEditarProduto());
 
     private final MaqEstadoLogins estadoMaq;
 

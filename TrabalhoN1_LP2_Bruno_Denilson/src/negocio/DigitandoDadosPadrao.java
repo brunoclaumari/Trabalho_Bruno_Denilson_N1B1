@@ -73,12 +73,13 @@ public class DigitandoDadosPadrao<T extends EntidadePai> {
            auxF = entidade;
 
         } else if (elemento instanceof Cliente) {
-
-        } else if (elemento instanceof Pedido) {
-
-        } else {//Aqui a entidade só pode ser itens do pedido
-
-        }
+            Cliente entidade=(Cliente) elemento;
+            
+            System.out.println("Digite o nome: ");
+            entidade.setNome(scanner.nextLine());
+            
+            auxF = entidade;
+        } 
 
         return (T) auxF;
 

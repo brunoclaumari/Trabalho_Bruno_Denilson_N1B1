@@ -5,6 +5,8 @@
  */
 package entidades;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,6 +18,10 @@ public class Pedido extends EntidadePai {
     private Date data;
     private Funcionario funcionario;
     private Cliente cliente;
+
+    public Pedido(int idSugerido) {
+
+    }
 
     public Cliente getCliente() {
         return cliente;
@@ -41,10 +47,12 @@ public class Pedido extends EntidadePai {
 
     @Override
     public String toString() {
+        DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");        
+        
         return "Id: " + getId() + "-"
-                + "Data: " + String.format("dd/MM/yyyy", getData()) + "-"
-                + "Id_Funcionario: " + funcionario.getId()+ "-"
-                + "Nome: " + funcionario.getNome()+ "-"
+                + "Data: " + formatDate.format(getData()) + " - "
+                + "Id_Funcionario: " + funcionario.getId() + " - "
+                + "Nome: " + funcionario.getNome() + " - "
                 + "Cliente: " + cliente.getNome();
     }
 

@@ -12,6 +12,7 @@ import entidades.Vendedor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import negocio.Acessar;
 import telaInicial.Entrada;
 
@@ -28,14 +29,23 @@ public class EstadoLoginVendedor extends MaqEstadoLogins{
     
 
    @Override
-    public boolean Executar() {        
-                
+    public boolean Executar() {
+        //tenta impar tela
+        try {            
+            new ProcessBuilder("cls").inheritIO().start().waitFor();  
+        } catch (IOException | InterruptedException e) {
+            e.getStackTrace();
+        } 
+                          
+        
         boolean sair = false;
         boolean senhaValida = false;
         Scanner sc = new Scanner(System.in);
         Usuario usuario = new Usuario();
 
         ArrayList<Vendedor> vendedores = null;
+        
+        
 
         System.out.println("DIGITE SEUS DADOS DE VENDEDOR!");
         System.out.println("-----------------------------");
@@ -46,7 +56,7 @@ public class EstadoLoginVendedor extends MaqEstadoLogins{
 
         PadraoDAO vDAO = new VendedorDao();
         
-        Entrada.usuario=usuario;
+        
         //ArrayList<Gerente> aux = new ArrayList<>();
 
         try {
@@ -67,6 +77,7 @@ public class EstadoLoginVendedor extends MaqEstadoLogins{
             for (Vendedor vend : vendedores) {
                 senhaValida = ac.validaUsuario(vend.getUsuario(), usuario);
                 if (senhaValida) {
+                    Entrada.usuario=vend;
                     Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_VENDEDOR.getEstadoMaq();
                     break;
                 }

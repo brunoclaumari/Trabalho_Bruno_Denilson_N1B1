@@ -11,16 +11,14 @@ import dao.PedidoDao;
 
 import entidades.Itens_Pedido;
 import entidades.Pedido;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 import negocio.TelaDeletePadrao;
 import telaInicial.Entrada;
 
@@ -83,11 +81,15 @@ public class TelaDeletarPedido extends MaqEstadoLogins {
             if (validaExclusaoDAO) {
 
                 pedidoDAO.deletar(pedido.getId());
+
+                for (Itens_Pedido itens : listaItens) {
+                    if (itens.getId_Pedido() == pedido.getId()) {
+                        itensDAO.deletar(itens.getId());
+                    }
+                }                
+                System.out.println("Pedido Excluido com sucesso!\n");
                 
-                for(Itens_Pedido itens:listaItens){
-                    itensDAO.deletar(itens.getId());
-                }
-                
+
                 //condiciona o menu ao tipo de usuario logado                
                 if (Entrada.usuarioLogado.equals("gerente")) {
                     Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
@@ -104,7 +106,6 @@ public class TelaDeletarPedido extends MaqEstadoLogins {
             System.out.println("DIGITE APENAS OS NUMEROS INFORMADOS NO MENU!!!\n");
         }
 
-      
         return sair;
 
     }

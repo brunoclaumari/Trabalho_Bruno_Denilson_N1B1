@@ -15,7 +15,6 @@ import entidades.Usuario;
 
 import estadoConsole.EnumEstadoConsole;
 
-import estadoConsole.TelaEditarVendedor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -89,6 +88,8 @@ public class TelaEditarPadrao<T extends EntidadePai> {
             if (resp == 'S') {
                 String operacao = EnumTipoCrud.ALTERAR.getNomeDoArquivo();
                 DAO.SalvarDadosDAO(entidade, operacao);
+                
+                System.out.println(nomeDaClasse + " editado com sucesso!\n");
 
                 //condiciona o menu ao tipo de usuario logado                
                 if (Entrada.usuarioLogado.equals("gerente")) {

@@ -20,17 +20,16 @@ import telaInicial.Entrada;
  *
  * @author bruna
  */
-public class EstadoLoginGerente extends MaqEstadoLogins {   
+public class EstadoLoginGerente extends MaqEstadoLogins {
 
-    
     EstadoLoginGerente() {
         setUsuLogado("gerente");
     }
-        
-   
+
     @Override
-    public boolean Executar() {        
-                
+    public boolean Executar() {
+       
+
         boolean sair = false;
         boolean senhaValida = false;
         Scanner sc = new Scanner(System.in);
@@ -46,8 +45,8 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
         usuario.setSenha(sc.nextLine());
 
         PadraoDAO gDao = new GerenteDao();
-        
-        Entrada.usuario=usuario;
+
+       
         //ArrayList<Gerente> aux = new ArrayList<>();
 
         try {
@@ -64,10 +63,12 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
             //Entrada.usuarioLogado=getUsuLogado();
             Entrada.estadoMaq = EnumEstadoConsole.CADASTRAR_FUNCIONARIO.getEstadoMaq();
 
-        } else {
+        } else {           
+            
             for (Gerente ger : gerentes) {
                 senhaValida = ac.validaUsuario(ger.getUsuario(), usuario);
                 if (senhaValida) {
+                    Entrada.usuario=ger;
                     Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
                     break;
                 }
@@ -96,13 +97,11 @@ public class EstadoLoginGerente extends MaqEstadoLogins {
                     case 'S':
                         sair = true;
                         break;
-                }                
+                }
             }
         }
 
         return sair;
     }
-
-   
 
 }

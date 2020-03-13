@@ -6,14 +6,14 @@
 package negocio;
 
 import EnumsArquivo.EnumTipoCrud;
-import dao.GerenteDao;
+
 import dao.PadraoDAO;
 import entidades.EntidadePai;
 import entidades.Funcionario;
-import entidades.Gerente;
+
 import entidades.Usuario;
 import estadoConsole.EnumEstadoConsole;
-import estadoConsole.TelaCadastroGerente;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,18 +27,7 @@ import telaInicial.Entrada;
  * @param <T>
  */
 public class TelaCadastrarPadrao<T extends EntidadePai> {
-    //boolean sair = false;
-
-    //ArrayList<Gerente> lista = new ArrayList<>();
-    //PadraoDAO DAO = new GerenteDao();
-    /*
-    int idSugerido;
-
-        idSugerido = DAO.sugereId(lista);
-
-        entidade = new EntidadePai(idSugerido);
-    
-     */
+  
     public boolean MontaTelaParaCadastrar(ArrayList<T> lista, PadraoDAO DAO, EntidadePai entidade, boolean sair, String nomeDaClasse) {
 
         Scanner sc = new Scanner(System.in);
@@ -65,6 +54,7 @@ public class TelaCadastrarPadrao<T extends EntidadePai> {
             if (resp == 'S') {
                 String operacao = EnumTipoCrud.INCLUIR.getNomeDoArquivo();
                 DAO.SalvarDadosDAO(entidade, operacao);
+                System.out.println(nomeDaClasse + " cadastrado com sucesso!\n");
 
                 do {
                     System.out.println("Deseja continuar cadastrando? S/N");
@@ -72,7 +62,6 @@ public class TelaCadastrarPadrao<T extends EntidadePai> {
                 } while (resp != 'N' && resp != 'S');
 
                 if (resp == 'S') {
-
                     return sair;
                 } else {
                     //condiciona o menu ao tipo de usuario logado                

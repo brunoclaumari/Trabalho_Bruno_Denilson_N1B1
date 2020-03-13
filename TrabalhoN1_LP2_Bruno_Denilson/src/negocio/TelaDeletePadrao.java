@@ -35,7 +35,7 @@ public class TelaDeletePadrao<T extends EntidadePai> {
      * @param nomeClasse
      * @return
      */
-    public boolean MontaTelaParaDelete(ArrayList<T> lista, PadraoDAO DAO, T entidade, boolean sair,String nomeClasse) {
+    public boolean MontaTelaParaDelete(ArrayList<T> lista, PadraoDAO DAO, T entidade, boolean sair, String nomeClasse) {
         //sair = false;
 
         lista = null;
@@ -54,6 +54,7 @@ public class TelaDeletePadrao<T extends EntidadePai> {
                 System.out.println("\nEXCLUSÃO DE " + nomeClasse);
                 System.out.println("Digite um dos ID's da lista para deletar ");
                 resp = sc.nextInt();
+                sc.nextLine();
 
                 for (T item : lista) {
                     if (item.getId() == resp) {
@@ -68,12 +69,15 @@ public class TelaDeletePadrao<T extends EntidadePai> {
             boolean validaExclusaoDAO = DAO.validaExclusaoDAO(entidade);
             if (validaExclusaoDAO) {
                 DAO.deletar(entidade.getId());
-                //condiciona o menu ao tipo de usuario logado                
-                if (Entrada.usuarioLogado.equals("gerente")) {
-                    Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
-                } else {
-                    Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_VENDEDOR.getEstadoMaq();
-                }
+                System.out.println(nomeClasse + " excluido com sucesso!\n");
+                System.out.println("Pressione qualquer tecla para continuar");
+                sc.nextLine();
+            }
+            //condiciona o menu ao tipo de usuario logado                
+            if (Entrada.usuarioLogado.equals("gerente")) {
+                Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_GERENTE.getEstadoMaq();
+            } else {
+                Entrada.estadoMaq = EnumEstadoConsole.MENU_OPCOES_VENDEDOR.getEstadoMaq();
             }
 
         } catch (IOException ex) {

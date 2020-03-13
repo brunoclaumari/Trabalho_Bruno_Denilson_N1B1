@@ -24,9 +24,8 @@ public class ClienteDao extends PadraoDAO<Cliente> {
 
     public ClienteDao(Class entidade) {
         super(entidade);
-    }
-
-  
+    }  
+    
    
     @Override
     public boolean validaInclusaoDAO(Cliente entidade) throws IOException {
@@ -38,67 +37,8 @@ public class ClienteDao extends PadraoDAO<Cliente> {
             valorInvalido = true;
         }
         return valorInvalido;
-    }
+    }   
     
-    
-
 }
 
-/*
-    
-    public List<Gerente> sobeGerente() throws IOException {
-        Gson gson = new GsonBuilder().create();
-        List<Gerente> listaArquivoGerente = new ArrayList<>();
-        String caminho = EnumArquivoTexto.GERENTE.getNomeDoArquivo();
 
-        if (!new File(caminho).exists()) {
-            new File(caminho).createNewFile();
-            //System.out.println("O arquivo não existe e foi criado");
-
-        } else {
-            try (JsonReader reader = new JsonReader(new FileReader(caminho))) {
-                Type type2 = new TypeToken<List<Gerente>>() {
-                }.getType();
-                //lendo = br.readLine();
-                listaArquivoGerente = gson.fromJson(reader, type2);
-                System.out.println("O arquivo existe e foi lido");
-
-            } catch (IOException e) {
-                e.getMessage();
-            } catch (Exception e) {
-                e.getMessage();
-            }
-        }
-
-        return listaArquivoGerente;
-    }
- */
-
-/*
-     @Override
-    public ArrayList<Cliente> transformaParaEntidade() throws IOException {
-        ArrayList<Cliente> retornaLista = new ArrayList<>();
-        Gson gson = new GsonBuilder().create();
-        String caminho = getTipoArquivo();
-
-        if (!new File(caminho).exists()) {
-            new File(caminho).createNewFile();
-            System.out.println("Arquivo " + caminho + " criado!");
-        } else {
-            try (JsonReader reader = new JsonReader(new FileReader(caminho))) {
-                Type type2 = new TypeToken<ArrayList<Cliente>>() {
-                }.getType();
-                //lendo = br.readLine();
-                retornaLista = gson.fromJson(reader, type2);
-                System.out.println("O arquivo existe e foi lido");
-
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return retornaLista;
-    }
-    
-    */

@@ -7,18 +7,13 @@ package estadoConsole;
 
 import dao.PadraoDAO;
 import dao.ProdutoDao;
-import dao.VendedorDao;
+
 import entidades.Produto;
-
-
-import entidades.Vendedor;
 
 
 import java.util.ArrayList;
 
 import negocio.TelaEditarPadrao;
-
-
 
 /**
  *

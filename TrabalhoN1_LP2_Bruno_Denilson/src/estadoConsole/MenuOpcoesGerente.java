@@ -29,7 +29,7 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
         Scanner sc = new Scanner(System.in);
         int alternativa = 0;
 
-        List<Integer> listOpcoes = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> listOpcoes = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         try {
             do {
@@ -44,13 +44,13 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
                 System.out.println("4 -  CADASTRAR PEDIDOS");
                 System.out.println("5 -  ALTERAR CLIENTES");
                 System.out.println("6 -  ALTERAR PRODUTOS");
-                System.out.println("7 -  ALTERAR PEDIDOS");
-                System.out.println("8 -  DELETAR CLIENTES");
-                System.out.println("9 -  DELETAR PRODUTOS");
-                System.out.println("10 - DELETAR PEDIDOS");
+                System.out.println("7 -  DELETAR CLIENTES");
+                System.out.println("8 -  DELETAR PRODUTOS");
+                System.out.println("9 -  DELETAR PEDIDOS");
                 System.out.println("---------------------------------");
 
                 alternativa = sc.nextInt();
+                sc.nextLine();
             } while (!listOpcoes.contains(alternativa));
         } catch (InputMismatchException e) {
             alternativa = -1;
@@ -69,31 +69,29 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
             case 2:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_CLIENTE.getEstadoMaq();
                 break;
-            case 3:                
+            case 3:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PRODUTO.getEstadoMaq();
                 break;
-            case 4:                
+            case 4:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PEDIDO.getEstadoMaq();
                 break;
-                 case 5:
+            case 5:
                 Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_CLIENTE.getEstadoMaq();
                 break;
             case 6:
                 Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_PRODUTO.getEstadoMaq();
                 break;
             case 7:
-                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_PEDIDO.getEstadoMaq();
-                break;
-                 case 8:
                 Entrada.estadoMaq = EnumEstadoConsole.DELETAR_CLIENTE.getEstadoMaq();
                 break;
-            case 9:
+            case 8:
                 Entrada.estadoMaq = EnumEstadoConsole.DELETAR_PRODUTO.getEstadoMaq();
                 break;
-            case 10:
+            case 9:
                 Entrada.estadoMaq = EnumEstadoConsole.DELETAR_PEDIDO.getEstadoMaq();
                 break;
-                
+            
+
         }
         return sair;
     }

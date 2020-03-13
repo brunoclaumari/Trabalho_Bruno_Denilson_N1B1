@@ -8,10 +8,8 @@ package estadoConsole;
 
 import dao.ClienteDao;
 import dao.PadraoDAO;
-import dao.VendedorDao;
-import entidades.Cliente;
 
-import entidades.Vendedor;
+import entidades.Cliente;
 
 import java.util.ArrayList;
 import negocio.TelaDeletePadrao;

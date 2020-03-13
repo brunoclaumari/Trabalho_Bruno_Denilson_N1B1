@@ -5,6 +5,9 @@
  */
 package entidades;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  *
  * @author 082170034
@@ -16,6 +19,7 @@ public class Produto extends EntidadePai {
     private int quantEstoque;
 
     public Produto() {
+
     }
 
     public int getQuantidade() {
@@ -52,10 +56,14 @@ public class Produto extends EntidadePai {
 
     @Override
     public String toString() {
-        return "Id: " + getId() + "-"
-                + "Nome: " + getNome() + "-"
-                + "Preço: " + getPreco() + "-"
+        Locale localeBR = new Locale("pt", "BR");
+        NumberFormat formata = NumberFormat.getInstance(localeBR);
+
+        return "Id: " + getId() + " - "
+                + "Nome: " + getNome() + " - "
+                + "Preço: R$ " + String.format("%.2f", getPreco()) + " - "
                 + "Quantidade: " + getQuantidade();
+        //formata.format(getPreco())
     }
 
 }
