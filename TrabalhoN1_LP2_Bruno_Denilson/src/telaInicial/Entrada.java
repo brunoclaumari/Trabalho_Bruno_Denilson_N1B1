@@ -21,6 +21,8 @@ public class Entrada {
     public static MaqEstadoLogins estadoMaq;
     
     public static String usuarioLogado;
+
+
     
     public static Usuario usuario; 
     
@@ -42,18 +44,19 @@ public class Entrada {
     }
     
 
+
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         
         Locale localeBR = new Locale("pt","BR");
             NumberFormat formata=NumberFormat.getInstance(localeBR);
             Locale.setDefault(localeBR);
-        
-        
-        clearConsole();
-        
+                
+        clearConsole();      
         
         estadoMaq = EnumEstadoConsole.TELA_INICIAL.getEstadoMaq();
         boolean saindo = false;
@@ -62,7 +65,7 @@ public class Entrada {
                 usuarioLogado=estadoMaq.getUsuLogado();
             }
             //quemTaLogado=usuarioLogado;
-            clearConsole();
+
             saindo = estadoMaq.Executar();
         }
         System.out.println("SAINDO DO SISTEMA, OBRIGADO!!!!");

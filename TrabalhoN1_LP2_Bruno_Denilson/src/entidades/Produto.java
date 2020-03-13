@@ -16,7 +16,6 @@ public class Produto extends EntidadePai {
     private int quantEstoque;
 
     public Produto() {
-
     }
 
     public int getQuantidade() {

@@ -69,10 +69,10 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
             case 2:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_CLIENTE.getEstadoMaq();
                 break;
-            case 3:
+            case 3:                
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PRODUTO.getEstadoMaq();
                 break;
-            case 4:
+            case 4:                
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_PEDIDO.getEstadoMaq();
                 break;
                  case 5:
@@ -94,7 +94,6 @@ public class MenuOpcoesGerente extends MaqEstadoLogins {
                 Entrada.estadoMaq = EnumEstadoConsole.DELETAR_PEDIDO.getEstadoMaq();
                 break;
                 
-
         }
         return sair;
     }
