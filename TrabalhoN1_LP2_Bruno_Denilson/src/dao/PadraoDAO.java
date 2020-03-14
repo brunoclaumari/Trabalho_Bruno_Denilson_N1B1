@@ -263,7 +263,7 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
             if (entidade instanceof Funcionario) {
                 //testa se Funcionario, ou os filhos estão na lista de pedidos
                 for (Pedido ped : pedidos) {
-                    if (ped.getFuncionario().equals(entidade)) {
+                    if (ped.getFuncionario().getId() == entidade.getId()) {
                         valorValido = false;
                         System.out.println("Não é possível excluir o " + Funcionario.class.getSimpleName()
                                 + ", ele existe em um pedido");
@@ -275,7 +275,7 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
                 //testa se Cliente estão na lista de pedidos
             } else if (entidade instanceof Cliente) {
                 for (Pedido ped : pedidos) {
-                    if (ped.getCliente().equals(entidade)) {
+                    if (ped.getCliente().getId() == entidade.getId()) {
                         valorValido = false;
                         System.out.println("Não é possível excluir o " + Cliente.class.getSimpleName()
                                 + ", ele existe em um pedido");
@@ -397,4 +397,3 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         return idSug;
     }
 }
-

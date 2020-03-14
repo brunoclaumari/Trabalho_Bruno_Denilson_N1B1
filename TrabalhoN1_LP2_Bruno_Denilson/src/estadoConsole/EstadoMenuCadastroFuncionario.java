@@ -63,6 +63,12 @@ public class EstadoMenuCadastroFuncionario extends MaqEstadoLogins {
             case 4:
                 Entrada.estadoMaq = EnumEstadoConsole.CADASTRA_VENDEDOR.getEstadoMaq();
                 break;
+            case 5:
+                Entrada.estadoMaq = EnumEstadoConsole.ALTERAR_VENDEDOR.getEstadoMaq();
+                break;
+            case 6:
+                Entrada.estadoMaq = EnumEstadoConsole.DELETAR_VENDEDOR.getEstadoMaq();
+                break;
         }
 
         return sair;
