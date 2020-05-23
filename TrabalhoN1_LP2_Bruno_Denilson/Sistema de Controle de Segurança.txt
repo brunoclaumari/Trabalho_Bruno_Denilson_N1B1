@@ -1,36 +1,5 @@
 
- Arquivo Produto.json alterado dia 13/03/2020 , 15:19:34
- Arquivo Produto.json alterado dia 13/03/2020 , 15:20:16
- Arquivo Produto.json alterado dia 13/03/2020 , 18:52:51
- Arquivo Pedido.json alterado dia 13/03/2020 , 18:54:00
- Arquivo Produto.json alterado dia 13/03/2020 , 18:54:00
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 18:54:00
- Arquivo Produto.json alterado dia 13/03/2020 , 18:54:00
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 18:54:00
- Arquivo Pedido.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Produto.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Produto.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Produto.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 18:59:12
- Arquivo Pedido.json alterado dia 13/03/2020 , 19:01:16
- Arquivo Produto.json alterado dia 13/03/2020 , 19:01:16
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:01:16
- Arquivo Produto.json alterado dia 13/03/2020 , 19:01:16
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:01:16
- Arquivo Pedido.json alterado dia 13/03/2020 , 19:08:58
- Arquivo Produto.json alterado dia 13/03/2020 , 19:08:58
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:08:58
- Arquivo Produto.json alterado dia 13/03/2020 , 19:08:58
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:08:58
- Arquivo Pedido.json alterado dia 13/03/2020 , 19:15:20
- Arquivo Produto.json alterado dia 13/03/2020 , 19:15:21
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:15:21
- Arquivo Produto.json alterado dia 13/03/2020 , 19:15:21
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:15:21
- Arquivo Pedido.json alterado dia 13/03/2020 , 19:59:10
- Arquivo Produto.json alterado dia 13/03/2020 , 19:59:10
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:59:10
- Arquivo Produto.json alterado dia 13/03/2020 , 19:59:10
- Arquivo Itens_Pedido.json alterado dia 13/03/2020 , 19:59:10
+ Arquivo Cliente.json alterado dia: 2020-05-22T20:32:08.613-03:00[America/Sao_Paulo]
+ Arquivo Cliente.json alterado dia: 2020-05-22T20:32:35.277-03:00[America/Sao_Paulo]
+ Arquivo Cliente.json alterado dia: 2020-05-22T21:20:29.670-03:00[America/Sao_Paulo]
+ Arquivo Cliente.json alterado dia: 2020-05-22T21:20:53.016-03:00[America/Sao_Paulo]

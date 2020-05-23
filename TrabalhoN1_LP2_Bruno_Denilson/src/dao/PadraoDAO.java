@@ -20,6 +20,7 @@ import entidades.Pedido;
 import entidades.Produto;
 
 import estadoConsole.EnumEstadoConsole;
+import folder_threads.GerenciadorAuditoriaSingleton;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,6 +33,8 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -151,10 +154,11 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         String caminho = getTipoArquivo();
         String js = MontaJson(listaEntidades);
 
-        Date data = new Date(System.currentTimeMillis());
-        DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy , HH:mm:ss");
-        String controleDeSeguranca = " Arquivo " + getTipoArquivo() + " alterado dia " + formatDate.format(data);
+        
+        String controleDeSeguranca=" Arquivo " + getTipoArquivo() + " alterado dia: " + ZonedDateTime.now().toString();
+        //String controleDeSeguranca = " Arquivo " + getTipoArquivo() + " alterado dia " + formatDate.format(data);
 
+        
         //Imprime lista no arquivo, porém tem que subir o arquivo inteiro pois se houver
         //adição de dados, será adicionada na classe e na lista e salvará porcima do arquivo que já existe
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho))) {
@@ -163,13 +167,12 @@ public abstract class PadraoDAO<T extends EntidadePai> implements Icadastro {
         } catch (IOException e) {
             e.getMessage();
         }
-
-        try (PrintWriter bw = new PrintWriter(new FileWriter("Sistema de Controle de Segurança.txt", true))) {
-            bw.println(controleDeSeguranca);
-
-        } catch (IOException e) {
-            e.getMessage();
-        }
+        
+        //Envia mensagem para o controle de segurança via Gerenciador Singleton
+        GerenciadorAuditoriaSingleton
+                .getInstancia()
+                .addMensagemAuditoria(controleDeSeguranca);
+        
     }
 
     /**

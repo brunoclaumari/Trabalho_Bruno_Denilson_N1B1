@@ -9,6 +9,7 @@ import entidades.Funcionario;
 
 import estadoConsole.EnumEstadoConsole;
 import estadoConsole.MaqEstadoLogins;
+import folder_threads.GerenciadorAuditoriaSingleton;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -20,35 +21,40 @@ import java.util.Locale;
 public class Entrada {
 
     public static MaqEstadoLogins estadoMaq;
-    
+
     public static String usuarioLogado;
-    
-    public static Funcionario usuario; 
-    
+
+    public static Funcionario usuario;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        Locale localeBR = new Locale("pt", "BR");
+        NumberFormat formata = NumberFormat.getInstance(localeBR);
+        Locale.setDefault(localeBR);
         
-        Locale localeBR = new Locale("pt","BR");
-            NumberFormat formata=NumberFormat.getInstance(localeBR);
-            Locale.setDefault(localeBR);     
-               
-               
+        //Ativa a thread de envio de mensagens ao Sistema de Segurança
+        GerenciadorAuditoriaSingleton.getInstancia().ativarThread();
+        
         estadoMaq = EnumEstadoConsole.TELA_INICIAL.getEstadoMaq();
         boolean saindo = false;
         while (!saindo) {
-            if(estadoMaq.getUsuLogado()!=null){
-                usuarioLogado=estadoMaq.getUsuLogado();
+            if (estadoMaq.getUsuLogado() != null) {
+                usuarioLogado = estadoMaq.getUsuLogado();
             }
             //quemTaLogado=usuarioLogado;            
             saindo = estadoMaq.Executar();
         }
-        
+        if(saindo==true){
+            
+            GerenciadorAuditoriaSingleton.getInstancia().desativarThread();
+            
+        }
+
         System.out.println("SAINDO DO SISTEMA, OBRIGADO!!!!");
 
     }
 
 }
-
-
